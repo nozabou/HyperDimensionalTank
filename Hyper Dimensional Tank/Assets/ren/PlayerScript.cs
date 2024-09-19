@@ -17,6 +17,11 @@ public class PlayerScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+       
+    }
+
+    private void PlayerMove()
+    {
         if (Input.GetKey(KeyCode.W))
         {
             // Quaternion.AngleAxis(度数法, 軸);
@@ -32,7 +37,7 @@ public class PlayerScript : MonoBehaviour
         if (Input.GetKey(KeyCode.D))
         {
             // Quaternion.AngleAxis(度数法, 軸);
-           this.transform.rotation *= Quaternion.AngleAxis(bodyRotateSpeed * Time.deltaTime, Vector3.up);
+            this.transform.rotation *= Quaternion.AngleAxis(bodyRotateSpeed * Time.deltaTime, Vector3.up);
         }
         if (Input.GetKey(KeyCode.A))
         {
