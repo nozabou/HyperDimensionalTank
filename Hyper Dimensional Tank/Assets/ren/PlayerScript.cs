@@ -1,7 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using System.Transactions;
+using Unity.VisualScripting;
 using UnityEngine;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class PlayerScript : MonoBehaviour
 {
@@ -22,8 +25,17 @@ public class PlayerScript : MonoBehaviour
     private float bulletSpeed = 100f;
 
     //クールタイム
-    private float shotCoolTime = 0f;
+    private int countCoolTime = 0;
+    private int shotCoolTime = 60;
     private bool isShot = true;
+
+    //体力
+    private int myHp = 100;
+    private bool isDead = false;
+    private int respawnTime = 180;
+
+    //残機
+    private int playerStock = 2;
     // Start is called before the first frame update
     void Start()
     {
@@ -33,13 +45,31 @@ public class PlayerScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(playerStock < 0)
+        {
+            Debug.Log("あなたの負け");
+            return;
+        }
+        if (isDead)
+        {
+            respawnTime--;
+            if (respawnTime < 0)//復活
+            {
+                isDead = false;
+                respawnTime = 180;
+                myHp = 100;
+                this.gameObject.transform.position = new Vector3(0, 10, 0);
+            }
+            return;
+        }
+        
         PlayerMove();
 
        
 
         if(isShot)
         {
-            shotCoolTime = 0.0f;
+            countCoolTime = 0;
             if (Input.GetKeyDown(KeyCode.Space))
             {
                 //弾の発射する場所を取得する
@@ -53,13 +83,14 @@ public class PlayerScript : MonoBehaviour
         }
         else
         {
-            if(shotCoolTime > 60.0f)
+            if(countCoolTime > shotCoolTime)
             {
                 isShot = true;
             }
-            shotCoolTime++;
+            countCoolTime++;
         }
 
+       
 
     }
 
@@ -101,5 +132,20 @@ public class PlayerScript : MonoBehaviour
         }
 
 
+    }
+
+    public void OnTriggerEnter(Collider other)
+    {
+        if(other.gameObject.tag == "Bullet")
+        {
+            myHp -= 100;
+            Debug.Log(myHp);
+        }
+
+        if(myHp <= 0)
+        {
+            playerStock--;
+            isDead = true;
+        }
     }
 }
