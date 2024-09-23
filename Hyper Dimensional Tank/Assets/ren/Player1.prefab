@@ -1,5 +1,89 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3082517214499073118
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2417480546785310436}
+  - component: {fileID: 1595195843458185537}
+  - component: {fileID: 3587030667362422155}
+  m_Layer: 0
+  m_Name: tank-head_001
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2417480546785310436
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3082517214499073118}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.2217974, z: -0.05885029}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 7024370102235889542}
+  m_Father: {fileID: 332139453088765527}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!33 &1595195843458185537
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3082517214499073118}
+  m_Mesh: {fileID: 3091473084259365558, guid: 8d7f46fd27f2b8e47b039542c1c8b7b8, type: 3}
+--- !u!23 &3587030667362422155
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3082517214499073118}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 11121992ad458184e93cbf9e25d563b5, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &3702905572379637004
 GameObject:
   m_ObjectHideFlags: 0
@@ -14,6 +98,7 @@ GameObject:
   - component: {fileID: 6630177580329262287}
   - component: {fileID: 5117221980447647190}
   - component: {fileID: 2980194434905462860}
+  - component: {fileID: 7149243515070506594}
   m_Layer: 0
   m_Name: Player1
   m_TagString: Untagged
@@ -101,6 +186,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shotPoint: {fileID: 6416864437745050125}
   bullet: {fileID: 1891745457907916235, guid: 025c399026000bd4ab79af1cb47823cf, type: 3}
+  myHp: 100
+  isDead: 0
+  playerStock: 2
 --- !u!54 &5117221980447647190
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -147,8 +235,174 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.8019458, y: 0.32502103, z: 0.95518047}
-  m_Center: {x: 0, y: 0.000000014901161, z: 0}
+  m_Size: {x: 0.8019458, y: 0.46935576, z: 0.8591012}
+  m_Center: {x: 0, y: 0.07216737, z: -0.0480396}
+--- !u!114 &7149243515070506594
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3702905572379637004}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: f52eb5df26c0b9a48be713f02464d0a1, type: 3}
+  m_NotificationBehavior: 2
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents:
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 02e08aba-2a98-43ef-a28d-b23a135d26be
+    m_ActionName: Player/Move[/SwitchProControllerHID/leftStick,/SwitchProControllerHID1/leftStick,/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 229a4c49-842d-461d-9b6a-87e17164b8c4
+    m_ActionName: Player/Look[/SwitchProControllerHID/rightStick,/SwitchProControllerHID1/rightStick,/Mouse/delta]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6630177580329262287}
+        m_TargetAssemblyTypeName: PlayerScript, Assembly-CSharp
+        m_MethodName: OnFire
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: a0668461-dc62-4dcf-a7a6-8002ed7069fc
+    m_ActionName: Player/Fire[/SwitchProControllerHID/rightTrigger,/SwitchProControllerHID1/rightTrigger,/Mouse/leftButton,/SwitchProControllerHID/buttonEast,/SwitchProControllerHID1/buttonEast]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: c4ec9b15-87bd-4df6-92ae-6253ec734937
+    m_ActionName: Player/HeadRotationLeft[/SwitchProControllerHID/leftShoulder,/SwitchProControllerHID1/leftShoulder]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: d38a9cb9-0536-4081-a357-aa62d860e4d2
+    m_ActionName: Player/HeadRotationRight[/SwitchProControllerHID/rightShoulder,/SwitchProControllerHID1/rightShoulder]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6630177580329262287}
+        m_TargetAssemblyTypeName: PlayerScript, Assembly-CSharp
+        m_MethodName: OnForward
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 041ee482-fb73-40af-85d0-88563ea1d356
+    m_ActionName: Player/Forward[/SwitchProControllerHID/leftStick/up,/SwitchProControllerHID1/leftStick/up,/SwitchProControllerHID/dpad/up,/SwitchProControllerHID1/dpad/up]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6630177580329262287}
+        m_TargetAssemblyTypeName: PlayerScript, Assembly-CSharp
+        m_MethodName: OnBackward
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: e57e2a55-5fee-460d-a4a7-7b36f11cc11e
+    m_ActionName: Player/Backward[/SwitchProControllerHID/leftStick/down,/SwitchProControllerHID1/leftStick/down,/SwitchProControllerHID/dpad/down,/SwitchProControllerHID1/dpad/down]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6630177580329262287}
+        m_TargetAssemblyTypeName: PlayerScript, Assembly-CSharp
+        m_MethodName: OnBodyRotationLeft
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 395d9b79-5f86-4813-b96e-f1e7c24929c6
+    m_ActionName: Player/BodyRotationLeft[/SwitchProControllerHID/leftStick/left,/SwitchProControllerHID1/leftStick/left,/SwitchProControllerHID/dpad/left,/SwitchProControllerHID1/dpad/left]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6630177580329262287}
+        m_TargetAssemblyTypeName: PlayerScript, Assembly-CSharp
+        m_MethodName: OnBodyRotationRight
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: f3778c70-fd4f-4751-bc53-f87bd86f3412
+    m_ActionName: Player/BodyRotationRight[/SwitchProControllerHID/leftStick/right,/SwitchProControllerHID1/leftStick/right,/SwitchProControllerHID/dpad/right,/SwitchProControllerHID1/dpad/right]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 87fb6278-7e2b-4d79-a47d-43f8589ba6de
+    m_ActionName: UI/Navigate[/SwitchProControllerHID/leftStick/up,/SwitchProControllerHID1/leftStick/up,/SwitchProControllerHID/rightStick/up,/SwitchProControllerHID1/rightStick/up,/SwitchProControllerHID/leftStick/down,/SwitchProControllerHID1/leftStick/down,/SwitchProControllerHID/rightStick/down,/SwitchProControllerHID1/rightStick/down,/SwitchProControllerHID/leftStick/left,/SwitchProControllerHID1/leftStick/left,/SwitchProControllerHID/rightStick/left,/SwitchProControllerHID1/rightStick/left,/SwitchProControllerHID/leftStick/right,/SwitchProControllerHID1/leftStick/right,/SwitchProControllerHID/rightStick/right,/SwitchProControllerHID1/rightStick/right,/SwitchProControllerHID/dpad,/SwitchProControllerHID1/dpad,/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: e003af13-a32e-4bcb-8d65-cbb02e19b9b5
+    m_ActionName: UI/Submit[/Keyboard/enter]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: ae0f2764-939c-4ea2-a5c7-b6c13356fd73
+    m_ActionName: UI/Cancel[/Keyboard/escape]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 40730d24-0e7b-42d9-b97f-11454ef91539
+    m_ActionName: UI/Point[/Mouse/position]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: def8c377-6d62-41ba-af7c-b92088c56856
+    m_ActionName: UI/Click[/Mouse/leftButton]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: aece13d7-5be0-4ecf-9b88-3f7e49e5fc50
+    m_ActionName: UI/ScrollWheel[/Mouse/scroll]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 33f0dd57-14b5-433f-98e6-36c90659caf2
+    m_ActionName: UI/MiddleClick[/Mouse/middleButton]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 4ff585bf-c261-40ff-9569-8560e0fa1072
+    m_ActionName: UI/RightClick[/Mouse/rightButton]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 65825c85-ecb5-4df3-b36b-752b66d8f514
+    m_ActionName: UI/TrackedDevicePosition
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: e46d424d-2568-46db-aab9-6e5007601815
+    m_ActionName: UI/TrackedDeviceOrientation
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: Player
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
 --- !u!1 &6416864437745050125
 GameObject:
   m_ObjectHideFlags: 0
@@ -232,76 +486,3 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!1001 &2739917842235478287
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 332139453088765527}
-    m_Modifications:
-    - target: {fileID: -8679921383154817045, guid: 8d7f46fd27f2b8e47b039542c1c8b7b8, type: 3}
-      propertyPath: m_RootOrder
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 8d7f46fd27f2b8e47b039542c1c8b7b8, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 8d7f46fd27f2b8e47b039542c1c8b7b8, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.2217974
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 8d7f46fd27f2b8e47b039542c1c8b7b8, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -0.05885029
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 8d7f46fd27f2b8e47b039542c1c8b7b8, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 8d7f46fd27f2b8e47b039542c1c8b7b8, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 8d7f46fd27f2b8e47b039542c1c8b7b8, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 8d7f46fd27f2b8e47b039542c1c8b7b8, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 8d7f46fd27f2b8e47b039542c1c8b7b8, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 8d7f46fd27f2b8e47b039542c1c8b7b8, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 8d7f46fd27f2b8e47b039542c1c8b7b8, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -7511558181221131132, guid: 8d7f46fd27f2b8e47b039542c1c8b7b8, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 11121992ad458184e93cbf9e25d563b5, type: 2}
-    - target: {fileID: 919132149155446097, guid: 8d7f46fd27f2b8e47b039542c1c8b7b8, type: 3}
-      propertyPath: m_Name
-      value: tank-head_001
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects:
-    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 8d7f46fd27f2b8e47b039542c1c8b7b8, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 7024370102235889542}
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 8d7f46fd27f2b8e47b039542c1c8b7b8, type: 3}
---- !u!4 &2417480546785310436 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 8d7f46fd27f2b8e47b039542c1c8b7b8, type: 3}
-  m_PrefabInstance: {fileID: 2739917842235478287}
-  m_PrefabAsset: {fileID: 0}
