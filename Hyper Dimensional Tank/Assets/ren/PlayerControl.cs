@@ -71,42 +71,6 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""Forward"",
-                    ""type"": ""Value"",
-                    ""id"": ""041ee482-fb73-40af-85d0-88563ea1d356"",
-                    ""expectedControlType"": ""Vector2"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": true
-                },
-                {
-                    ""name"": ""Backward"",
-                    ""type"": ""Value"",
-                    ""id"": ""e57e2a55-5fee-460d-a4a7-7b36f11cc11e"",
-                    ""expectedControlType"": ""Vector2"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": true
-                },
-                {
-                    ""name"": ""BodyRotationLeft"",
-                    ""type"": ""Value"",
-                    ""id"": ""395d9b79-5f86-4813-b96e-f1e7c24929c6"",
-                    ""expectedControlType"": ""Vector2"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": true
-                },
-                {
-                    ""name"": ""BodyRotationRight"",
-                    ""type"": ""Value"",
-                    ""id"": ""f3778c70-fd4f-4751-bc53-f87bd86f3412"",
-                    ""expectedControlType"": ""Vector2"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -244,6 +208,17 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""6789d106-4e2d-4c5a-9f85-e3769c367a70"",
+                    ""path"": ""<XInputController>/leftStick"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""c1f7a91b-d0fd-4a62-997e-7fb9b69bf235"",
                     ""path"": ""<Gamepad>/rightStick"",
                     ""interactions"": """",
@@ -360,94 +335,6 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
                     ""action"": ""HeadRotationRight"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""0e3719c4-6d38-4eaf-8b3e-b299b6aa23e8"",
-                    ""path"": ""<Gamepad>/leftStick/up"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Gamepad"",
-                    ""action"": ""Forward"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""43ee250e-cb5c-41ce-9de5-aeac332d88a9"",
-                    ""path"": ""<Gamepad>/dpad/up"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Gamepad"",
-                    ""action"": ""Forward"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""0ccc0481-13ff-4a8b-898a-4e7a706b3164"",
-                    ""path"": ""<Gamepad>/leftStick/down"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Gamepad"",
-                    ""action"": ""Backward"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""f96d68d8-d237-413f-b9b2-178c46287384"",
-                    ""path"": ""<Gamepad>/dpad/down"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Gamepad"",
-                    ""action"": ""Backward"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""4c728d9c-ecdf-4695-a7d3-aff67b6fe6f8"",
-                    ""path"": ""<Gamepad>/leftStick/left"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Gamepad"",
-                    ""action"": ""BodyRotationLeft"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""c460ae9c-3eea-4374-8d81-1a29bfa609ad"",
-                    ""path"": ""<Gamepad>/dpad/left"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""BodyRotationLeft"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""a9349d62-af4b-4e72-b41c-570f79ad9686"",
-                    ""path"": ""<Gamepad>/leftStick/right"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Gamepad"",
-                    ""action"": ""BodyRotationRight"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""1f2a0e6b-86f5-48d0-8512-9f602a9487da"",
-                    ""path"": ""<Gamepad>/dpad/right"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""BodyRotationRight"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -1040,10 +927,6 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
         m_Player_Fire = m_Player.FindAction("Fire", throwIfNotFound: true);
         m_Player_HeadRotationLeft = m_Player.FindAction("HeadRotationLeft", throwIfNotFound: true);
         m_Player_HeadRotationRight = m_Player.FindAction("HeadRotationRight", throwIfNotFound: true);
-        m_Player_Forward = m_Player.FindAction("Forward", throwIfNotFound: true);
-        m_Player_Backward = m_Player.FindAction("Backward", throwIfNotFound: true);
-        m_Player_BodyRotationLeft = m_Player.FindAction("BodyRotationLeft", throwIfNotFound: true);
-        m_Player_BodyRotationRight = m_Player.FindAction("BodyRotationRight", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1122,10 +1005,6 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Fire;
     private readonly InputAction m_Player_HeadRotationLeft;
     private readonly InputAction m_Player_HeadRotationRight;
-    private readonly InputAction m_Player_Forward;
-    private readonly InputAction m_Player_Backward;
-    private readonly InputAction m_Player_BodyRotationLeft;
-    private readonly InputAction m_Player_BodyRotationRight;
     public struct PlayerActions
     {
         private @PlayerControl m_Wrapper;
@@ -1135,10 +1014,6 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
         public InputAction @Fire => m_Wrapper.m_Player_Fire;
         public InputAction @HeadRotationLeft => m_Wrapper.m_Player_HeadRotationLeft;
         public InputAction @HeadRotationRight => m_Wrapper.m_Player_HeadRotationRight;
-        public InputAction @Forward => m_Wrapper.m_Player_Forward;
-        public InputAction @Backward => m_Wrapper.m_Player_Backward;
-        public InputAction @BodyRotationLeft => m_Wrapper.m_Player_BodyRotationLeft;
-        public InputAction @BodyRotationRight => m_Wrapper.m_Player_BodyRotationRight;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1163,18 +1038,6 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
             @HeadRotationRight.started += instance.OnHeadRotationRight;
             @HeadRotationRight.performed += instance.OnHeadRotationRight;
             @HeadRotationRight.canceled += instance.OnHeadRotationRight;
-            @Forward.started += instance.OnForward;
-            @Forward.performed += instance.OnForward;
-            @Forward.canceled += instance.OnForward;
-            @Backward.started += instance.OnBackward;
-            @Backward.performed += instance.OnBackward;
-            @Backward.canceled += instance.OnBackward;
-            @BodyRotationLeft.started += instance.OnBodyRotationLeft;
-            @BodyRotationLeft.performed += instance.OnBodyRotationLeft;
-            @BodyRotationLeft.canceled += instance.OnBodyRotationLeft;
-            @BodyRotationRight.started += instance.OnBodyRotationRight;
-            @BodyRotationRight.performed += instance.OnBodyRotationRight;
-            @BodyRotationRight.canceled += instance.OnBodyRotationRight;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -1194,18 +1057,6 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
             @HeadRotationRight.started -= instance.OnHeadRotationRight;
             @HeadRotationRight.performed -= instance.OnHeadRotationRight;
             @HeadRotationRight.canceled -= instance.OnHeadRotationRight;
-            @Forward.started -= instance.OnForward;
-            @Forward.performed -= instance.OnForward;
-            @Forward.canceled -= instance.OnForward;
-            @Backward.started -= instance.OnBackward;
-            @Backward.performed -= instance.OnBackward;
-            @Backward.canceled -= instance.OnBackward;
-            @BodyRotationLeft.started -= instance.OnBodyRotationLeft;
-            @BodyRotationLeft.performed -= instance.OnBodyRotationLeft;
-            @BodyRotationLeft.canceled -= instance.OnBodyRotationLeft;
-            @BodyRotationRight.started -= instance.OnBodyRotationRight;
-            @BodyRotationRight.performed -= instance.OnBodyRotationRight;
-            @BodyRotationRight.canceled -= instance.OnBodyRotationRight;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -1393,10 +1244,6 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
         void OnFire(InputAction.CallbackContext context);
         void OnHeadRotationLeft(InputAction.CallbackContext context);
         void OnHeadRotationRight(InputAction.CallbackContext context);
-        void OnForward(InputAction.CallbackContext context);
-        void OnBackward(InputAction.CallbackContext context);
-        void OnBodyRotationLeft(InputAction.CallbackContext context);
-        void OnBodyRotationRight(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

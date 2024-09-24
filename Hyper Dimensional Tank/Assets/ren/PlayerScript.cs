@@ -8,13 +8,21 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Windows;
 using static UnityEditor.Experimental.GraphView.GraphView;
+using static UnityEditor.Timeline.TimelinePlaybackControls;
+using static UnityEngine.EventSystems.StandaloneInputModule;
 
 public class PlayerScript : MonoBehaviour
 {
     //プレイヤーの動き
     private float moveSpeed = 5f;
     private Vector3 moveVec;
-   
+    private Vector2 inputMove;
+    private float inputButton;
+
+    private bool isLeft = false;
+    private bool isRight = false;
+
+
     private Rigidbody rb;
     //float inputVertical;
     //float inputHorizontal;
@@ -62,12 +70,12 @@ public class PlayerScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       
+    
         if (isDead)
         {
             return;
         }
-        PlayerMove();
+        //PlayerMove();
 
         if (isShot)
         {
@@ -99,20 +107,25 @@ public class PlayerScript : MonoBehaviour
             countCoolTime++;
         }
 
-       
+        this.transform.Translate(inputMove.y * moveVec * Time.deltaTime);
+        //Quaternion.AngleAxis(度数法, 軸);
+        this.transform.rotation *= Quaternion.AngleAxis(inputMove.x * bodyRotateSpeed * Time.deltaTime, Vector3.up);
+        
+        if (isLeft)
+        {
+            //Quaternion.AngleAxis(度数法, 軸);
+            head.rotation *= Quaternion.AngleAxis(-headRotateSpeed * Time.deltaTime, Vector3.up);
+        }
+        if (isRight)
+        {
+            //Quaternion.AngleAxis(度数法, 軸);
+            head.rotation *= Quaternion.AngleAxis(headRotateSpeed * Time.deltaTime, Vector3.up);
+        }
 
+        //isLeft = false;
+        //isRight = false;
     }
-    //private void OnEnable()
-    //{
-    //    // 全体のActionを有効化
-    //    playerControl.Enable();
-    //}
-
-    //private void OnDisable()
-    //{
-    //    // 全体のActionを無効化
-    //    playerControl.Disable();
-    //}
+ 
     public void OnFire(InputAction.CallbackContext context)
     {
         print("Fire Actionが呼ばれた！");
@@ -121,117 +134,97 @@ public class PlayerScript : MonoBehaviour
             isShot = true;
         }
     }
-    public void OnForward(InputAction.CallbackContext context)
+
+    public void OnMove(InputAction.CallbackContext context)
     {
-        this.transform.Translate(moveVec * Time.deltaTime);
-    }
-    public void OnBackward(InputAction.CallbackContext context)
-    {
-        this.transform.Translate(-moveVec * Time.deltaTime);
-    }
-    public void OnBodyRotationRight(InputAction.CallbackContext context)
-    {
-        // Quaternion.AngleAxis(度数法, 軸);
-        this.transform.rotation *= Quaternion.AngleAxis(bodyRotateSpeed * Time.deltaTime, Vector3.up);
-    }
-    public void OnBodyRotationLeft(InputAction.CallbackContext context)
-    {
-        // Quaternion.AngleAxis(度数法, 軸);
-        this.transform.rotation *= Quaternion.AngleAxis(-bodyRotateSpeed * Time.deltaTime, Vector3.up);
+        // 入力値を保持しておく
+        inputMove = context.ReadValue<Vector2>();
+     
     }
 
-    private void PlayerMove()
+    public void HeadRotationLeft(InputAction.CallbackContext context)
     {
-
-        //前進と後退
-        //if (playerControl.Player.Forward.IsPressed())//押されている間
-        //{
-        //    this.transform.Translate(moveVec * Time.deltaTime);
-        //}
-
-        //if (playerControl.Player.Backward.IsPressed())//押されている間
-        //{
-        //    this.transform.Translate(-moveVec * Time.deltaTime);
-        //}
-        //回転
-        //if (playerControl.Player.BodyRotationRight.IsPressed())//押されている間
-        //{
-        //    // Quaternion.AngleAxis(度数法, 軸);
-        //    this.transform.rotation *= Quaternion.AngleAxis(bodyRotateSpeed * Time.deltaTime, Vector3.up);
-        //}
-        //if (playerControl.Player.BodyRotationLeft.IsPressed())//押されている間
-        //{
-        //    // Quaternion.AngleAxis(度数法, 軸);
-        //    this.transform.rotation *= Quaternion.AngleAxis(-bodyRotateSpeed * Time.deltaTime, Vector3.up);
-        //}
-
-        //大砲の向きの回転
-        //ActionMaps/Action/入力のふるまい
-        if (playerControl.Player.HeadRotationLeft.IsPressed())//押されている間
-        {
-            //Quaternion.AngleAxis(度数法, 軸);
-            head.rotation *= Quaternion.AngleAxis(-headRotateSpeed * Time.deltaTime, Vector3.up);
-        }
-        if (playerControl.Player.HeadRotationRight.IsPressed())//押されている間
-        {
-            //Quaternion.AngleAxis(度数法, 軸);
-            head.rotation *= Quaternion.AngleAxis(headRotateSpeed * Time.deltaTime, Vector3.up);
-        }
-
-
-
-        //inputVertical = Input.GetAxis("Vertical");
-        //inputHorizontal = Input.GetAxis("Horizontal");
-
-        //this.transform.Translate(0,0, inputVertical * Time.deltaTime);
-        //this.transform.rotation *= Quaternion.AngleAxis(inputHorizontal * bodyRotateSpeed * Time.deltaTime, Vector3.up);
-
-        //if (Input.GetKeyDown(KeyCode.Joystick2Button14))
-        //{
-        //    head.rotation *= Quaternion.AngleAxis(headRotateSpeed * Time.deltaTime, Vector3.up);
-        //}
-
-
-
-
-
-        //if (Input.GetKey(KeyCode.W))
-        //{
-        //    // Quaternion.AngleAxis(度数法, 軸);
-        //    this.transform.Translate(moveSpeed * Time.deltaTime);
-        //}
-        //if (Input.GetKey(KeyCode.S))
-        //{
-        //    // Quaternion.AngleAxis(度数法, 軸);
-        //    this.transform.Translate(-moveSpeed * Time.deltaTime);
-        //}
-
-
-        //if (Input.GetKey(KeyCode.D))
-        //{
-        //    // Quaternion.AngleAxis(度数法, 軸);
-        //    this.transform.rotation *= Quaternion.AngleAxis(bodyRotateSpeed * Time.deltaTime, Vector3.up);
-        //}
-        //if (Input.GetKey(KeyCode.A))
-        //{
-        //    // Quaternion.AngleAxis(度数法, 軸);
-        //    this.transform.rotation *= Quaternion.AngleAxis(-bodyRotateSpeed * Time.deltaTime, Vector3.up);
-        //}
-
-
-        //if (Input.GetKey(KeyCode.RightArrow))
-        //{
-        //    // Quaternion.AngleAxis(度数法, 軸);
-        //    head.rotation *= Quaternion.AngleAxis(headRotateSpeed * Time.deltaTime, Vector3.up);
-        //}
-        //if (Input.GetKey(KeyCode.LeftArrow))
-        //{
-        //    // Quaternion.AngleAxis(度数法, 軸);
-        //    head.rotation *= Quaternion.AngleAxis(-headRotateSpeed * Time.deltaTime, Vector3.up);
-        //}
-
-
+        isLeft = true;
     }
+
+    public void HeadRotationRight(InputAction.CallbackContext context)
+    {
+        isRight = true;
+    }
+
+
+    //private void PlayerMove()
+    //{
+
+
+
+    //    //大砲の向きの回転
+    //    //ActionMaps/Action/入力のふるまい
+    //    if (playerControl.Player.HeadRotationLeft.IsPressed())//押されている間
+    //    {
+    //        //Quaternion.AngleAxis(度数法, 軸);
+    //        head.rotation *= Quaternion.AngleAxis(-headRotateSpeed * Time.deltaTime, Vector3.up);
+    //    }
+    //    if (playerControl.Player.HeadRotationRight.IsPressed())//押されている間
+    //    {
+    //        //Quaternion.AngleAxis(度数法, 軸);
+    //        head.rotation *= Quaternion.AngleAxis(headRotateSpeed * Time.deltaTime, Vector3.up);
+    //    }
+
+
+
+    //    //inputVertical = Input.GetAxis("Vertical");
+    //    //inputHorizontal = Input.GetAxis("Horizontal");
+
+    //    //this.transform.Translate(0,0, inputVertical * Time.deltaTime);
+    //    //this.transform.rotation *= Quaternion.AngleAxis(inputHorizontal * bodyRotateSpeed * Time.deltaTime, Vector3.up);
+
+    //    //if (Input.GetKeyDown(KeyCode.Joystick2Button14))
+    //    //{
+    //    //    head.rotation *= Quaternion.AngleAxis(headRotateSpeed * Time.deltaTime, Vector3.up);
+    //    //}
+
+
+
+
+
+    //    //if (Input.GetKey(KeyCode.W))
+    //    //{
+    //    //    // Quaternion.AngleAxis(度数法, 軸);
+    //    //    this.transform.Translate(moveSpeed * Time.deltaTime);
+    //    //}
+    //    //if (Input.GetKey(KeyCode.S))
+    //    //{
+    //    //    // Quaternion.AngleAxis(度数法, 軸);
+    //    //    this.transform.Translate(-moveSpeed * Time.deltaTime);
+    //    //}
+
+
+    //    //if (Input.GetKey(KeyCode.D))
+    //    //{
+    //    //    // Quaternion.AngleAxis(度数法, 軸);
+    //    //    this.transform.rotation *= Quaternion.AngleAxis(bodyRotateSpeed * Time.deltaTime, Vector3.up);
+    //    //}
+    //    //if (Input.GetKey(KeyCode.A))
+    //    //{
+    //    //    // Quaternion.AngleAxis(度数法, 軸);
+    //    //    this.transform.rotation *= Quaternion.AngleAxis(-bodyRotateSpeed * Time.deltaTime, Vector3.up);
+    //    //}
+
+
+    //    //if (Input.GetKey(KeyCode.RightArrow))
+    //    //{
+    //    //    // Quaternion.AngleAxis(度数法, 軸);
+    //    //    head.rotation *= Quaternion.AngleAxis(headRotateSpeed * Time.deltaTime, Vector3.up);
+    //    //}
+    //    //if (Input.GetKey(KeyCode.LeftArrow))
+    //    //{
+    //    //    // Quaternion.AngleAxis(度数法, 軸);
+    //    //    head.rotation *= Quaternion.AngleAxis(-headRotateSpeed * Time.deltaTime, Vector3.up);
+    //    //}
+
+
+    //}
 
     public void OnTriggerEnter(Collider other)
     {
