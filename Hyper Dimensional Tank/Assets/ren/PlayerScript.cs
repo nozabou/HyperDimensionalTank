@@ -95,10 +95,7 @@ public class PlayerScript : MonoBehaviour
         }
         else
         {
-            if(countCoolTime > shotCoolTime)
-            {
-                isShot = true;
-            }
+          
             countCoolTime++;
         }
 
@@ -119,6 +116,10 @@ public class PlayerScript : MonoBehaviour
     public void OnFire(InputAction.CallbackContext context)
     {
         print("Fire Action‚ªŒÄ‚Î‚ê‚½I");
+        if (countCoolTime > shotCoolTime)
+        {
+            isShot = true;
+        }
     }
     public void OnForward(InputAction.CallbackContext context)
     {
