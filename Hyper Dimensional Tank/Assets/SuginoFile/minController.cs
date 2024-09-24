@@ -5,6 +5,8 @@ using UnityEngine;
 public class minController : MonoBehaviour
 {
     int count = 0;
+    [SerializeField]
+    GameObject explosion = null;
     private void OnCollisionEnter(Collision collision)
     {
         if(collision.gameObject.tag == "Bullet")
@@ -12,9 +14,9 @@ public class minController : MonoBehaviour
             count++;
             if(count > 2) 
             {
+                Instantiate(explosion);
                 Destroy(gameObject);
             }
-            Destroy(collision.gameObject);
         }
     }
 
