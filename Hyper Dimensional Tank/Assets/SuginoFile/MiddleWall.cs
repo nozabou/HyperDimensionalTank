@@ -14,7 +14,6 @@ public class MiddleWall : MonoBehaviour
             {
                 Destroy(gameObject);
             }
-            Destroy(collision.gameObject);
         }
     }
         // Start is called before the first frame update
