@@ -14,16 +14,16 @@ public class MiddleWall : MonoBehaviour
             count++;
             if (count > 4)
             {
-                Instantiate(explosion);
+                Instantiate(explosion, transform.position, Quaternion.identity);
                 Destroy(gameObject);
             }
-            Destroy(collision.gameObject);
+            
         }
     }
         // Start is called before the first frame update
         void Start()
     {
-        
+    
     }
 
     // Update is called once per frame

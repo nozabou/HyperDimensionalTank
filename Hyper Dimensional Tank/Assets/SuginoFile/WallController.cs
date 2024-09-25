@@ -4,26 +4,29 @@ using UnityEngine;
 
 public class WallController : MonoBehaviour
 {
-    int count = 0;
+    private int count = 0;
     [SerializeField]
-    GameObject explosion = null;
+    private int sCount;
+
+    [SerializeField]
+    private GameObject explosion = null;
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.tag == "Bullet")
         {
             count++;
-            if (count > 19)
+            if (count > sCount)
             {
-                Instantiate(explosion);
+                Instantiate(explosion, transform.position, Quaternion.identity);
                 Destroy(gameObject);
             }
-            Destroy(collision.gameObject);
+            
         }
     }
     // Start is called before the first frame update
     void Start()
     {
-        
+          
     }
 
     // Update is called once per frame
