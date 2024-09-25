@@ -76,35 +76,17 @@ public class PlayerScript : MonoBehaviour
             return;
         }
         //PlayerMove();
-
         if (isShot)
         {
-            countCoolTime = 0;
-            if (playerControl.Player.Fire.triggered)//押された瞬間
-            {
-                //弾の発射する場所を取得する
-                Vector3 bulletPosition = shotPoint.transform.position;
-                //
-                GameObject newBullet = Instantiate(bullet, bulletPosition, head.gameObject.transform.rotation);
-                Vector3 dir = newBullet.transform.forward;
-                newBullet.GetComponent<Rigidbody>().AddForce(dir * bulletSpeed * Time.deltaTime, ForceMode.Impulse);
-                isShot = false;
-            }
-            //if (Input.GetKeyDown(KeyCode.Space))
-            //{
-            //    //弾の発射する場所を取得する
-            //    Vector3 bulletPosition = shotPoint.transform.position;
-            //    //
-            //    GameObject newBullet = Instantiate(bullet, bulletPosition, head.gameObject.transform.rotation);
-            //    Vector3 dir = newBullet.transform.forward;
-            //    newBullet.GetComponent<Rigidbody>().AddForce(dir * bulletSpeed * Time.deltaTime, ForceMode.Impulse);
-            //    isShot = false;
-            //}
+           
         }
         else
         {
-          
             countCoolTime++;
+            if (countCoolTime > shotCoolTime)
+            {
+                isShot = true;
+            }
         }
 
         this.transform.Translate(inputMove.y * moveVec * Time.deltaTime);
@@ -129,9 +111,16 @@ public class PlayerScript : MonoBehaviour
     public void OnFire(InputAction.CallbackContext context)
     {
         print("Fire Actionが呼ばれた！");
-        if (countCoolTime > shotCoolTime)
+        if (isShot)
         {
-            isShot = true;
+            //弾の発射する場所を取得する
+            Vector3 bulletPosition = shotPoint.transform.position;
+            //
+            GameObject newBullet = Instantiate(bullet, bulletPosition, head.gameObject.transform.rotation);
+            Vector3 dir = newBullet.transform.forward;
+            newBullet.GetComponent<Rigidbody>().AddForce(dir * bulletSpeed * Time.deltaTime, ForceMode.Impulse);
+            countCoolTime = 0;
+            isShot = false;
         }
     }
 
@@ -144,87 +133,28 @@ public class PlayerScript : MonoBehaviour
 
     public void HeadRotationLeft(InputAction.CallbackContext context)
     {
-        isLeft = true;
+        if (context.started) // ボタンを押したとき
+        {
+            isLeft = true;
+        }
+        else if (context.canceled) // ボタンを離したとき
+        {
+            isLeft = false;
+        }
     }
 
     public void HeadRotationRight(InputAction.CallbackContext context)
     {
-        isRight = true;
+        if (context.started) // ボタンを押したとき
+        {
+            isRight = true;
+        }
+        else if (context.canceled) // ボタンを離したとき
+        {
+            isRight = false;
+        }
     }
 
-
-    //private void PlayerMove()
-    //{
-
-
-
-    //    //大砲の向きの回転
-    //    //ActionMaps/Action/入力のふるまい
-    //    if (playerControl.Player.HeadRotationLeft.IsPressed())//押されている間
-    //    {
-    //        //Quaternion.AngleAxis(度数法, 軸);
-    //        head.rotation *= Quaternion.AngleAxis(-headRotateSpeed * Time.deltaTime, Vector3.up);
-    //    }
-    //    if (playerControl.Player.HeadRotationRight.IsPressed())//押されている間
-    //    {
-    //        //Quaternion.AngleAxis(度数法, 軸);
-    //        head.rotation *= Quaternion.AngleAxis(headRotateSpeed * Time.deltaTime, Vector3.up);
-    //    }
-
-
-
-    //    //inputVertical = Input.GetAxis("Vertical");
-    //    //inputHorizontal = Input.GetAxis("Horizontal");
-
-    //    //this.transform.Translate(0,0, inputVertical * Time.deltaTime);
-    //    //this.transform.rotation *= Quaternion.AngleAxis(inputHorizontal * bodyRotateSpeed * Time.deltaTime, Vector3.up);
-
-    //    //if (Input.GetKeyDown(KeyCode.Joystick2Button14))
-    //    //{
-    //    //    head.rotation *= Quaternion.AngleAxis(headRotateSpeed * Time.deltaTime, Vector3.up);
-    //    //}
-
-
-
-
-
-    //    //if (Input.GetKey(KeyCode.W))
-    //    //{
-    //    //    // Quaternion.AngleAxis(度数法, 軸);
-    //    //    this.transform.Translate(moveSpeed * Time.deltaTime);
-    //    //}
-    //    //if (Input.GetKey(KeyCode.S))
-    //    //{
-    //    //    // Quaternion.AngleAxis(度数法, 軸);
-    //    //    this.transform.Translate(-moveSpeed * Time.deltaTime);
-    //    //}
-
-
-    //    //if (Input.GetKey(KeyCode.D))
-    //    //{
-    //    //    // Quaternion.AngleAxis(度数法, 軸);
-    //    //    this.transform.rotation *= Quaternion.AngleAxis(bodyRotateSpeed * Time.deltaTime, Vector3.up);
-    //    //}
-    //    //if (Input.GetKey(KeyCode.A))
-    //    //{
-    //    //    // Quaternion.AngleAxis(度数法, 軸);
-    //    //    this.transform.rotation *= Quaternion.AngleAxis(-bodyRotateSpeed * Time.deltaTime, Vector3.up);
-    //    //}
-
-
-    //    //if (Input.GetKey(KeyCode.RightArrow))
-    //    //{
-    //    //    // Quaternion.AngleAxis(度数法, 軸);
-    //    //    head.rotation *= Quaternion.AngleAxis(headRotateSpeed * Time.deltaTime, Vector3.up);
-    //    //}
-    //    //if (Input.GetKey(KeyCode.LeftArrow))
-    //    //{
-    //    //    // Quaternion.AngleAxis(度数法, 軸);
-    //    //    head.rotation *= Quaternion.AngleAxis(-headRotateSpeed * Time.deltaTime, Vector3.up);
-    //    //}
-
-
-    //}
 
     public void OnTriggerEnter(Collider other)
     {
