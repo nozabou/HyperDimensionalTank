@@ -5,6 +5,8 @@ using UnityEngine;
 public class WallController : MonoBehaviour
 {
     int count = 0;
+    [SerializeField]
+    GameObject explosion = null;
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.tag == "Bullet")
@@ -12,6 +14,7 @@ public class WallController : MonoBehaviour
             count++;
             if (count > 19)
             {
+                Instantiate(explosion);
                 Destroy(gameObject);
             }
             Destroy(collision.gameObject);

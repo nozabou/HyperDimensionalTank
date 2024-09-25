@@ -17,6 +17,7 @@ public class minController : MonoBehaviour
                 Instantiate(explosion);
                 Destroy(gameObject);
             }
+            Destroy(collision.gameObject);
         }
     }
 

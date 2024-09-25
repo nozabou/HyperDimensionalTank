@@ -5,6 +5,8 @@ using UnityEngine;
 public class MiddleWall : MonoBehaviour
 {
     int count = 0;
+    [SerializeField]
+    GameObject explosion = null;
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.tag == "Bullet")
@@ -12,8 +14,10 @@ public class MiddleWall : MonoBehaviour
             count++;
             if (count > 4)
             {
+                Instantiate(explosion);
                 Destroy(gameObject);
             }
+            Destroy(collision.gameObject);
         }
     }
         // Start is called before the first frame update
