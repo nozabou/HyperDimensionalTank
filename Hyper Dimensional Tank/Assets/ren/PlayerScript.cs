@@ -76,17 +76,10 @@ public class PlayerScript : MonoBehaviour
             return;
         }
         //PlayerMove();
-        if (isShot)
+        countCoolTime++;
+        if (countCoolTime > shotCoolTime)
         {
-           
-        }
-        else
-        {
-            countCoolTime++;
-            if (countCoolTime > shotCoolTime)
-            {
-                isShot = true;
-            }
+            isShot = true;
         }
 
         this.transform.Translate(inputMove.y * moveVec * Time.deltaTime);
