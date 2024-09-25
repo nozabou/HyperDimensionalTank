@@ -41,7 +41,7 @@ public class PlayerScript : MonoBehaviour
     public GameObject bullet;
 
     //弾の速さ
-    private float bulletSpeed = 200f;
+    private float bulletSpeed = 400f;
 
     //クールタイム
     private int countCoolTime = 0;
