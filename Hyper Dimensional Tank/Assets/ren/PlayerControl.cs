@@ -46,9 +46,18 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": true
                 },
                 {
-                    ""name"": ""Fire"",
+                    ""name"": ""NomalShot"",
                     ""type"": ""Button"",
                     ""id"": ""a0668461-dc62-4dcf-a7a6-8002ed7069fc"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""StrongShot"",
+                    ""type"": ""Button"",
+                    ""id"": ""e2ede456-538f-4beb-b63a-1ac17c8fb62b"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -252,56 +261,12 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""143bb1cd-cc10-4eca-a2f0-a3664166fe91"",
-                    ""path"": ""<Gamepad>/rightTrigger"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": "";Gamepad"",
-                    ""action"": ""Fire"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""05f6913d-c316-48b2-a6bb-e225f14c7960"",
-                    ""path"": ""<Mouse>/leftButton"",
+                    ""path"": ""<Keyboard>/j"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": "";Keyboard&Mouse"",
-                    ""action"": ""Fire"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""886e731e-7071-4ae4-95c0-e61739dad6fd"",
-                    ""path"": ""<Touchscreen>/primaryTouch/tap"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": "";Touch"",
-                    ""action"": ""Fire"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""ee3d0cd2-254e-47a7-a8cb-bc94d9658c54"",
-                    ""path"": ""<Joystick>/trigger"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Joystick"",
-                    ""action"": ""Fire"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""8255d333-5683-4943-a58a-ccb207ff1dce"",
-                    ""path"": ""<XRController>/{PrimaryAction}"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""XR"",
-                    ""action"": ""Fire"",
+                    ""action"": ""NomalShot"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -312,7 +277,7 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Fire"",
+                    ""action"": ""NomalShot"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -335,6 +300,28 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
                     ""action"": ""HeadRotationRight"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""10102025-66f6-4068-a139-ebeeb31134da"",
+                    ""path"": ""<Keyboard>/k"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""StrongShot"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4c9ad8e3-1484-4452-9664-da98b9d4b3ec"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""StrongShot"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -924,7 +911,8 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
         m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
         m_Player_Look = m_Player.FindAction("Look", throwIfNotFound: true);
-        m_Player_Fire = m_Player.FindAction("Fire", throwIfNotFound: true);
+        m_Player_NomalShot = m_Player.FindAction("NomalShot", throwIfNotFound: true);
+        m_Player_StrongShot = m_Player.FindAction("StrongShot", throwIfNotFound: true);
         m_Player_HeadRotationLeft = m_Player.FindAction("HeadRotationLeft", throwIfNotFound: true);
         m_Player_HeadRotationRight = m_Player.FindAction("HeadRotationRight", throwIfNotFound: true);
         // UI
@@ -1002,7 +990,8 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
     private List<IPlayerActions> m_PlayerActionsCallbackInterfaces = new List<IPlayerActions>();
     private readonly InputAction m_Player_Move;
     private readonly InputAction m_Player_Look;
-    private readonly InputAction m_Player_Fire;
+    private readonly InputAction m_Player_NomalShot;
+    private readonly InputAction m_Player_StrongShot;
     private readonly InputAction m_Player_HeadRotationLeft;
     private readonly InputAction m_Player_HeadRotationRight;
     public struct PlayerActions
@@ -1011,7 +1000,8 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
         public PlayerActions(@PlayerControl wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_Player_Move;
         public InputAction @Look => m_Wrapper.m_Player_Look;
-        public InputAction @Fire => m_Wrapper.m_Player_Fire;
+        public InputAction @NomalShot => m_Wrapper.m_Player_NomalShot;
+        public InputAction @StrongShot => m_Wrapper.m_Player_StrongShot;
         public InputAction @HeadRotationLeft => m_Wrapper.m_Player_HeadRotationLeft;
         public InputAction @HeadRotationRight => m_Wrapper.m_Player_HeadRotationRight;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
@@ -1029,9 +1019,12 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
             @Look.started += instance.OnLook;
             @Look.performed += instance.OnLook;
             @Look.canceled += instance.OnLook;
-            @Fire.started += instance.OnFire;
-            @Fire.performed += instance.OnFire;
-            @Fire.canceled += instance.OnFire;
+            @NomalShot.started += instance.OnNomalShot;
+            @NomalShot.performed += instance.OnNomalShot;
+            @NomalShot.canceled += instance.OnNomalShot;
+            @StrongShot.started += instance.OnStrongShot;
+            @StrongShot.performed += instance.OnStrongShot;
+            @StrongShot.canceled += instance.OnStrongShot;
             @HeadRotationLeft.started += instance.OnHeadRotationLeft;
             @HeadRotationLeft.performed += instance.OnHeadRotationLeft;
             @HeadRotationLeft.canceled += instance.OnHeadRotationLeft;
@@ -1048,9 +1041,12 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
             @Look.started -= instance.OnLook;
             @Look.performed -= instance.OnLook;
             @Look.canceled -= instance.OnLook;
-            @Fire.started -= instance.OnFire;
-            @Fire.performed -= instance.OnFire;
-            @Fire.canceled -= instance.OnFire;
+            @NomalShot.started -= instance.OnNomalShot;
+            @NomalShot.performed -= instance.OnNomalShot;
+            @NomalShot.canceled -= instance.OnNomalShot;
+            @StrongShot.started -= instance.OnStrongShot;
+            @StrongShot.performed -= instance.OnStrongShot;
+            @StrongShot.canceled -= instance.OnStrongShot;
             @HeadRotationLeft.started -= instance.OnHeadRotationLeft;
             @HeadRotationLeft.performed -= instance.OnHeadRotationLeft;
             @HeadRotationLeft.canceled -= instance.OnHeadRotationLeft;
@@ -1241,7 +1237,8 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
     {
         void OnMove(InputAction.CallbackContext context);
         void OnLook(InputAction.CallbackContext context);
-        void OnFire(InputAction.CallbackContext context);
+        void OnNomalShot(InputAction.CallbackContext context);
+        void OnStrongShot(InputAction.CallbackContext context);
         void OnHeadRotationLeft(InputAction.CallbackContext context);
         void OnHeadRotationRight(InputAction.CallbackContext context);
     }

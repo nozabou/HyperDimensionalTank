@@ -22,11 +22,6 @@ public class PlayerScript : MonoBehaviour
     private bool isLeft = false;
     private bool isRight = false;
 
-
-    private Rigidbody rb;
-    //float inputVertical;
-    //float inputHorizontal;
-
     private float bodyRotateSpeed = 50f;
     private float headRotateSpeed = 50f;
     //Vector3 moveSpeed = new Vector3(0, 0, 1f);
@@ -38,15 +33,20 @@ public class PlayerScript : MonoBehaviour
     public GameObject shotPoint;
 
     //íe
-    public GameObject bullet;
+    public GameObject bulletNomal;
+    public GameObject bulletStrong;
 
     //íeÇÃë¨Ç≥
     private float bulletSpeed = 400f;
 
     //ÉNÅ[ÉãÉ^ÉCÉÄ
-    private int countCoolTime = 0;
-    private int shotCoolTime = 60;
-    private bool isShot = true;
+    private int nomalCountTime = 0;
+    private int canNomalCoolTime = 60;
+    private int strongCountTime = 0;
+    private int canStrongCoolTime = 90;
+
+    private bool isShotNomal = true;
+    private bool isShotStrong = true;
 
     //ëÃóÕ
     public int myHp = 100;
@@ -75,11 +75,17 @@ public class PlayerScript : MonoBehaviour
         {
             return;
         }
-        //PlayerMove();
-        countCoolTime++;
-        if (countCoolTime > shotCoolTime)
+     
+        nomalCountTime++;
+        if (nomalCountTime > canNomalCoolTime)
         {
-            isShot = true;
+            isShotNomal = true;
+        }
+
+        strongCountTime++;
+        if (strongCountTime > canStrongCoolTime)
+        {
+            isShotStrong = true;
         }
 
         this.transform.Translate(inputMove.y * moveVec * Time.deltaTime);
@@ -101,19 +107,32 @@ public class PlayerScript : MonoBehaviour
         //isRight = false;
     }
  
-    public void OnFire(InputAction.CallbackContext context)
+    public void OnShotNomal(InputAction.CallbackContext context)
     {
-        print("Fire ActionÇ™åƒÇŒÇÍÇΩÅI");
-        if (isShot)
+        if (isShotNomal)
         {
             //íeÇÃî≠éÀÇ∑ÇÈèÍèäÇéÊìæÇ∑ÇÈ
             Vector3 bulletPosition = shotPoint.transform.position;
             //
-            GameObject newBullet = Instantiate(bullet, bulletPosition, head.gameObject.transform.rotation);
+            GameObject newBullet = Instantiate(bulletNomal, bulletPosition, head.gameObject.transform.rotation);
             Vector3 dir = newBullet.transform.forward;
             newBullet.GetComponent<Rigidbody>().AddForce(dir * bulletSpeed * Time.deltaTime, ForceMode.Impulse);
-            countCoolTime = 0;
-            isShot = false;
+            nomalCountTime = 0;
+            isShotNomal = false;
+        }
+    }
+    public void OnShotStrong(InputAction.CallbackContext context)
+    {
+        if (isShotStrong)
+        {
+            //íeÇÃî≠éÀÇ∑ÇÈèÍèäÇéÊìæÇ∑ÇÈ
+            Vector3 bulletPosition = shotPoint.transform.position;
+            //
+            GameObject newBullet = Instantiate(bulletStrong, bulletPosition, head.gameObject.transform.rotation);
+            Vector3 dir = newBullet.transform.forward;
+            newBullet.GetComponent<Rigidbody>().AddForce(dir * bulletSpeed * Time.deltaTime, ForceMode.Impulse);
+            strongCountTime = 0;
+            isShotStrong = false;
         }
     }
 
@@ -153,11 +172,14 @@ public class PlayerScript : MonoBehaviour
     {
         if(other.gameObject.tag == "Bullet")
         {
+            myHp -= 5;
+        }
+        if (other.gameObject.tag == "BigBullet")
+        {
             myHp -= 30;
-            Debug.Log(myHp);
         }
 
-        if(myHp <= 0)
+        if (myHp <= 0)
         {
             isDead = true;
             playerStock--;
