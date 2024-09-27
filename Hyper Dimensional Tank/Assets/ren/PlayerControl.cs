@@ -80,6 +80,15 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""CameraMove"",
+                    ""type"": ""Value"",
+                    ""id"": ""2d2bd761-f404-4f46-b989-dc4675d171db"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -322,6 +331,17 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""StrongShot"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""bc7e77b9-0740-413b-8e11-6935ec3eb674"",
+                    ""path"": ""<Gamepad>/rightStick"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""CameraMove"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -915,6 +935,7 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
         m_Player_StrongShot = m_Player.FindAction("StrongShot", throwIfNotFound: true);
         m_Player_HeadRotationLeft = m_Player.FindAction("HeadRotationLeft", throwIfNotFound: true);
         m_Player_HeadRotationRight = m_Player.FindAction("HeadRotationRight", throwIfNotFound: true);
+        m_Player_CameraMove = m_Player.FindAction("CameraMove", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -994,6 +1015,7 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_StrongShot;
     private readonly InputAction m_Player_HeadRotationLeft;
     private readonly InputAction m_Player_HeadRotationRight;
+    private readonly InputAction m_Player_CameraMove;
     public struct PlayerActions
     {
         private @PlayerControl m_Wrapper;
@@ -1004,6 +1026,7 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
         public InputAction @StrongShot => m_Wrapper.m_Player_StrongShot;
         public InputAction @HeadRotationLeft => m_Wrapper.m_Player_HeadRotationLeft;
         public InputAction @HeadRotationRight => m_Wrapper.m_Player_HeadRotationRight;
+        public InputAction @CameraMove => m_Wrapper.m_Player_CameraMove;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1031,6 +1054,9 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
             @HeadRotationRight.started += instance.OnHeadRotationRight;
             @HeadRotationRight.performed += instance.OnHeadRotationRight;
             @HeadRotationRight.canceled += instance.OnHeadRotationRight;
+            @CameraMove.started += instance.OnCameraMove;
+            @CameraMove.performed += instance.OnCameraMove;
+            @CameraMove.canceled += instance.OnCameraMove;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -1053,6 +1079,9 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
             @HeadRotationRight.started -= instance.OnHeadRotationRight;
             @HeadRotationRight.performed -= instance.OnHeadRotationRight;
             @HeadRotationRight.canceled -= instance.OnHeadRotationRight;
+            @CameraMove.started -= instance.OnCameraMove;
+            @CameraMove.performed -= instance.OnCameraMove;
+            @CameraMove.canceled -= instance.OnCameraMove;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -1241,6 +1270,7 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
         void OnStrongShot(InputAction.CallbackContext context);
         void OnHeadRotationLeft(InputAction.CallbackContext context);
         void OnHeadRotationRight(InputAction.CallbackContext context);
+        void OnCameraMove(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

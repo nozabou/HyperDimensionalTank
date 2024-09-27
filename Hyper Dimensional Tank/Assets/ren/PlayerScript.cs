@@ -17,7 +17,6 @@ public class PlayerScript : MonoBehaviour
     private float moveSpeed = 5f;
     private Vector3 moveVec;
     private Vector2 inputMove;
-    private float inputButton;
 
     private bool isLeft = false;
     private bool isRight = false;
@@ -37,7 +36,8 @@ public class PlayerScript : MonoBehaviour
     public GameObject bulletStrong;
 
     //弾の速さ
-    private float bulletSpeed = 400f;
+    private float nomalBulletSpeed = 600f;
+    private float strongBulletSpeed = 400f;
 
     //クールタイム
     private int nomalCountTime = 0;
@@ -116,7 +116,7 @@ public class PlayerScript : MonoBehaviour
             //
             GameObject newBullet = Instantiate(bulletNomal, bulletPosition, head.gameObject.transform.rotation);
             Vector3 dir = newBullet.transform.forward;
-            newBullet.GetComponent<Rigidbody>().AddForce(dir * bulletSpeed * Time.deltaTime, ForceMode.Impulse);
+            newBullet.GetComponent<Rigidbody>().AddForce(dir * nomalBulletSpeed * Time.deltaTime, ForceMode.Impulse);
             nomalCountTime = 0;
             isShotNomal = false;
         }
@@ -130,7 +130,7 @@ public class PlayerScript : MonoBehaviour
             //
             GameObject newBullet = Instantiate(bulletStrong, bulletPosition, head.gameObject.transform.rotation);
             Vector3 dir = newBullet.transform.forward;
-            newBullet.GetComponent<Rigidbody>().AddForce(dir * bulletSpeed * Time.deltaTime, ForceMode.Impulse);
+            newBullet.GetComponent<Rigidbody>().AddForce(dir * strongBulletSpeed * Time.deltaTime, ForceMode.Impulse);
             strongCountTime = 0;
             isShotStrong = false;
         }
