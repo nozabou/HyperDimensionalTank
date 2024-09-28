@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 9022717411061426684}
   - component: {fileID: -2472361849641848840}
   - component: {fileID: 4119187739523164425}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: BigBullet2P
   m_TagString: BigBullet
   m_Icon: {fileID: 0}

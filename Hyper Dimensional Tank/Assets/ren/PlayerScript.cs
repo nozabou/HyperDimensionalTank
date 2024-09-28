@@ -13,6 +13,8 @@ using static UnityEngine.EventSystems.StandaloneInputModule;
 
 public class PlayerScript : MonoBehaviour
 {
+    public string playerIndex;
+
     //ÉvÉåÉCÉÑÅ[ÇÃìÆÇ´
     private float moveSpeed = 5f;
     private Vector3 moveVec;
@@ -170,13 +172,17 @@ public class PlayerScript : MonoBehaviour
 
     public void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.tag == "Bullet")
+        string layerName = LayerMask.LayerToName(other.gameObject.layer);
+        if (layerName != playerIndex)
         {
-            myHp -= 5;
-        }
-        if (other.gameObject.tag == "BigBullet")
-        {
-            myHp -= 30;
+            if (other.gameObject.tag == "Bullet")
+            {
+                myHp -= 5;
+            }
+            if (other.gameObject.tag == "BigBullet")
+            {
+                myHp -= 30;
+            }
         }
 
         if (myHp <= 0)
