@@ -42,6 +42,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "BeamShot",
+                    "type": "Button",
+                    "id": "b2ed74ae-b7e3-41e7-b651-6b320136d2b6",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "HeadRotationLeft",
                     "type": "Button",
                     "id": "c4ec9b15-87bd-4df6-92ae-6253ec734937",
@@ -263,7 +272,7 @@
                     "path": "<Gamepad>/buttonEast",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Gamepad",
                     "action": "NomalShot",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -307,7 +316,7 @@
                     "path": "<Gamepad>/buttonNorth",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Gamepad",
                     "action": "StrongShot",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -320,6 +329,28 @@
                     "processors": "",
                     "groups": "Gamepad",
                     "action": "CameraMove",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "70a5fb09-1fd7-47ea-8a26-d530e20471a4",
+                    "path": "<Keyboard>/l",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "BeamShot",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "128aea55-20b6-4044-be87-3ae7d80cdb42",
+                    "path": "<Gamepad>/buttonWest",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "BeamShot",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

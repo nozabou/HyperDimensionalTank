@@ -36,6 +36,7 @@ public class PlayerScript : MonoBehaviour
     //弾
     public GameObject bulletNomal;
     public GameObject bulletStrong;
+   
 
     //弾の速さ
     private float nomalBulletSpeed = 600f;
@@ -49,16 +50,25 @@ public class PlayerScript : MonoBehaviour
 
     private bool isShotNomal = true;
     private bool isShotStrong = true;
+   
 
     //体力
     public int myHp = 100;
     public bool isDead = false;
     public int playerStock = 2;
 
-
+    //ビーム(必殺技)
+    public GameObject bulletBeam;
+    private bool isShotBeam = false;
+    //ビームの全体フレーム
+    private int beamFream = 90;
+    private int beamFreamCount = 0;
+    private bool isBeamCount = false;
+    //ゲージ
+    public int beamGauge = 0;
 
     //InputSystem
-   private PlayerControl playerControl;
+    private PlayerControl playerControl;
 
     // Start is called before the first frame update
     void Start()
@@ -77,7 +87,30 @@ public class PlayerScript : MonoBehaviour
         {
             return;
         }
-     
+        /////////////////////////////////////////////////////
+        ///ビーム
+        if (isBeamCount)
+        {
+            beamFreamCount++;
+            if (beamFreamCount > beamFream)
+            {
+                beamFreamCount = 0;
+                isBeamCount = false;
+                isShotBeam = false ;
+            }
+            return;
+        }
+
+        if (beamGauge > 100)
+        {
+            beamGauge = 100;
+            isShotBeam = true;
+        }
+        else
+        {
+            beamGauge++;
+        }
+        ////////////////////////////////////////////////////
         nomalCountTime++;
         if (nomalCountTime > canNomalCoolTime)
         {
@@ -105,8 +138,7 @@ public class PlayerScript : MonoBehaviour
             head.rotation *= Quaternion.AngleAxis(headRotateSpeed * Time.deltaTime, Vector3.up);
         }
 
-        //isLeft = false;
-        //isRight = false;
+       
     }
  
     public void OnShotNomal(InputAction.CallbackContext context)
@@ -135,6 +167,22 @@ public class PlayerScript : MonoBehaviour
             newBullet.GetComponent<Rigidbody>().AddForce(dir * strongBulletSpeed * Time.deltaTime, ForceMode.Impulse);
             strongCountTime = 0;
             isShotStrong = false;
+        }
+    }
+
+    public void OnShotBeam(InputAction.CallbackContext context)
+    {
+        if (context.started && isShotBeam) // ボタンを押したとき
+        {
+            //弾の発射する場所を取得する
+            Vector3 bulletPosition = shotPoint.transform.position;
+            //
+            GameObject newBullet = Instantiate(bulletBeam, bulletPosition, head.gameObject.transform.rotation);
+            // Vector3 dir = newBullet.transform.forward;
+            beamGauge = 0;
+            isBeamCount = true;
+            isShotBeam = false;
+            Destroy(newBullet, 1); //10秒後に弾を消す
         }
     }
 
@@ -179,9 +227,28 @@ public class PlayerScript : MonoBehaviour
             {
                 myHp -= 5;
             }
-            if (other.gameObject.tag == "BigBullet")
+            if (other.gameObject.tag == "StrongBullet")
             {
                 myHp -= 30;
+            }
+           
+        }
+
+        if (myHp <= 0)
+        {
+            isDead = true;
+            playerStock--;
+        }
+    }
+    //ビームの多段ヒット
+    public void OnTriggerStay(Collider other)
+    {
+        string layerName = LayerMask.LayerToName(other.gameObject.layer);
+        if (layerName != playerIndex)
+        {
+            if (other.gameObject.tag == "Beam")
+            {
+                myHp -= 2;
             }
         }
 
@@ -190,5 +257,6 @@ public class PlayerScript : MonoBehaviour
             isDead = true;
             playerStock--;
         }
+       
     }
 }

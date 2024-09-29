@@ -15,8 +15,8 @@ GameObject:
   - component: {fileID: -2472361849641848840}
   - component: {fileID: 4119187739523164425}
   m_Layer: 7
-  m_Name: BigBullet2P
-  m_TagString: BigBullet
+  m_Name: StrongBullet2P
+  m_TagString: StrongBullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
