@@ -64,6 +64,15 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
+                    ""name"": ""BeamShot"",
+                    ""type"": ""Button"",
+                    ""id"": ""b2ed74ae-b7e3-41e7-b651-6b320136d2b6"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
                     ""name"": ""HeadRotationLeft"",
                     ""type"": ""Button"",
                     ""id"": ""c4ec9b15-87bd-4df6-92ae-6253ec734937"",
@@ -285,7 +294,7 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
                     ""path"": ""<Gamepad>/buttonEast"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Gamepad"",
                     ""action"": ""NomalShot"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -329,7 +338,7 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
                     ""path"": ""<Gamepad>/buttonNorth"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Gamepad"",
                     ""action"": ""StrongShot"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -342,6 +351,28 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
                     ""action"": ""CameraMove"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""70a5fb09-1fd7-47ea-8a26-d530e20471a4"",
+                    ""path"": ""<Keyboard>/l"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""BeamShot"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""128aea55-20b6-4044-be87-3ae7d80cdb42"",
+                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""BeamShot"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -933,6 +964,7 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
         m_Player_Look = m_Player.FindAction("Look", throwIfNotFound: true);
         m_Player_NomalShot = m_Player.FindAction("NomalShot", throwIfNotFound: true);
         m_Player_StrongShot = m_Player.FindAction("StrongShot", throwIfNotFound: true);
+        m_Player_BeamShot = m_Player.FindAction("BeamShot", throwIfNotFound: true);
         m_Player_HeadRotationLeft = m_Player.FindAction("HeadRotationLeft", throwIfNotFound: true);
         m_Player_HeadRotationRight = m_Player.FindAction("HeadRotationRight", throwIfNotFound: true);
         m_Player_CameraMove = m_Player.FindAction("CameraMove", throwIfNotFound: true);
@@ -1013,6 +1045,7 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Look;
     private readonly InputAction m_Player_NomalShot;
     private readonly InputAction m_Player_StrongShot;
+    private readonly InputAction m_Player_BeamShot;
     private readonly InputAction m_Player_HeadRotationLeft;
     private readonly InputAction m_Player_HeadRotationRight;
     private readonly InputAction m_Player_CameraMove;
@@ -1024,6 +1057,7 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
         public InputAction @Look => m_Wrapper.m_Player_Look;
         public InputAction @NomalShot => m_Wrapper.m_Player_NomalShot;
         public InputAction @StrongShot => m_Wrapper.m_Player_StrongShot;
+        public InputAction @BeamShot => m_Wrapper.m_Player_BeamShot;
         public InputAction @HeadRotationLeft => m_Wrapper.m_Player_HeadRotationLeft;
         public InputAction @HeadRotationRight => m_Wrapper.m_Player_HeadRotationRight;
         public InputAction @CameraMove => m_Wrapper.m_Player_CameraMove;
@@ -1048,6 +1082,9 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
             @StrongShot.started += instance.OnStrongShot;
             @StrongShot.performed += instance.OnStrongShot;
             @StrongShot.canceled += instance.OnStrongShot;
+            @BeamShot.started += instance.OnBeamShot;
+            @BeamShot.performed += instance.OnBeamShot;
+            @BeamShot.canceled += instance.OnBeamShot;
             @HeadRotationLeft.started += instance.OnHeadRotationLeft;
             @HeadRotationLeft.performed += instance.OnHeadRotationLeft;
             @HeadRotationLeft.canceled += instance.OnHeadRotationLeft;
@@ -1073,6 +1110,9 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
             @StrongShot.started -= instance.OnStrongShot;
             @StrongShot.performed -= instance.OnStrongShot;
             @StrongShot.canceled -= instance.OnStrongShot;
+            @BeamShot.started -= instance.OnBeamShot;
+            @BeamShot.performed -= instance.OnBeamShot;
+            @BeamShot.canceled -= instance.OnBeamShot;
             @HeadRotationLeft.started -= instance.OnHeadRotationLeft;
             @HeadRotationLeft.performed -= instance.OnHeadRotationLeft;
             @HeadRotationLeft.canceled -= instance.OnHeadRotationLeft;
@@ -1268,6 +1308,7 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
         void OnLook(InputAction.CallbackContext context);
         void OnNomalShot(InputAction.CallbackContext context);
         void OnStrongShot(InputAction.CallbackContext context);
+        void OnBeamShot(InputAction.CallbackContext context);
         void OnHeadRotationLeft(InputAction.CallbackContext context);
         void OnHeadRotationRight(InputAction.CallbackContext context);
         void OnCameraMove(InputAction.CallbackContext context);

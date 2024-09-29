@@ -7,7 +7,8 @@ TagManager:
   - SystemWall
   - Bullet
   - FxTemporaire
-  - BigBullet
+  - Beam
+  - StrongBullet
   layers:
   - Default
   - TransparentFX

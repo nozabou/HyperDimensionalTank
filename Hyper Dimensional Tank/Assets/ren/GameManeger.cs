@@ -15,6 +15,9 @@ public class GameManeger : MonoBehaviour
     //HpUI
     public Slider hpBar1P;
     public Slider hpBar2P;
+    //beamUI
+    public Slider beamBar1P;
+    public Slider beamBar2P;
 
     //残機
     public GameObject[] stockUi1P;
@@ -37,8 +40,12 @@ public class GameManeger : MonoBehaviour
         playerScript1P = playerObj1P.GetComponent<PlayerScript>();
         playerScript2P = playerObj2P.GetComponent<PlayerScript>();
 
+        //HPバーをMAXに
         hpBar1P.value = 1;
         hpBar2P.value = 1;
+        //ビームのゲージを0に
+        beamBar1P.value = 0;
+        beamBar2P.value = 0;
 
         //リスポーンタイマー
         respownPanel1P = GameObject.Find("Canvas/Canvas1P/RespownPanel");
@@ -106,7 +113,11 @@ public class GameManeger : MonoBehaviour
 
     private void FixedUpdate()
     {
+        //HPの変化を描画
         hpBar1P.value = (float)(playerScript1P.myHp) / 100.0f;
         hpBar2P.value = (float)(playerScript2P.myHp) / 100.0f;
+        //ビームの描画
+        beamBar1P.value = (float)(playerScript1P.beamGauge) / 100.0f;
+        beamBar2P.value = (float)(playerScript2P.beamGauge) / 100.0f;
     }
 }
