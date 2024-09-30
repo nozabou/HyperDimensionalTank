@@ -36,6 +36,8 @@ public class GameManeger : MonoBehaviour
     public GameObject respornPoint1;
     public GameObject respornPoint2;
 
+  
+
     // Start is called before the first frame update
     void Start()
     {
@@ -73,6 +75,7 @@ public class GameManeger : MonoBehaviour
         }
         if (playerScript1P.isDead)
         {
+           
             playerObj1P.SetActive(false);
             respownPanel1P.SetActive(true);
             respawnTime1P--;
@@ -97,6 +100,7 @@ public class GameManeger : MonoBehaviour
         }
         if (playerScript2P.isDead)
         {
+           
             playerObj2P.SetActive(false);
             respownPanel2P.SetActive(true);
             respawnTime2P--;
