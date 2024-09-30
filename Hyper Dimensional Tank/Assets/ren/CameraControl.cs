@@ -15,11 +15,9 @@ public class CameraControl : MonoBehaviour
     private Vector2 inputMove;
     private bool isCameraMove = false;
 
-    private float zoom;
     // Start is called before the first frame update
     void Start()
     {
-        zoom = 0.0f;
         //lastMousePosition = Input.mousePosition;
         lastTargetPosition = Player.transform.position;
     }

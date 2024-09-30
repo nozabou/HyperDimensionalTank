@@ -57,6 +57,7 @@ public class PlayerScript : MonoBehaviour
     public bool isDead = false;
     public int playerStock = 2;
 
+  
     //ビーム(必殺技)
     public GameObject bulletBeam;
     private bool isShotBeam = false;
@@ -218,7 +219,30 @@ public class PlayerScript : MonoBehaviour
     }
 
 
-    public void OnTriggerEnter(Collider other)
+    //public void OnTriggerEnter(Collider other)
+    //{
+    //    string layerName = LayerMask.LayerToName(other.gameObject.layer);
+    //    if (layerName != playerIndex)
+    //    {
+    //        if (other.gameObject.tag == "Bullet")
+    //        {
+    //            myHp -= 5;
+    //        }
+    //        if (other.gameObject.tag == "StrongBullet")
+    //        {
+    //            myHp -= 30;
+    //        }
+           
+    //    }
+
+    //    if (myHp <= 0)
+    //    {
+    //        isDead = true;
+    //        playerStock--;
+    //    }
+    //}
+    //ビームの多段ヒット
+    public void OnTriggerStay(Collider other)
     {
         string layerName = LayerMask.LayerToName(other.gameObject.layer);
         if (layerName != playerIndex)
@@ -231,7 +255,10 @@ public class PlayerScript : MonoBehaviour
             {
                 myHp -= 30;
             }
-           
+            if (other.gameObject.tag == "Beam")
+            {
+                myHp -= 2;
+            }
         }
 
         if (myHp <= 0)
@@ -239,19 +266,7 @@ public class PlayerScript : MonoBehaviour
             isDead = true;
             playerStock--;
         }
-    }
-    //ビームの多段ヒット
-    public void OnTriggerStay(Collider other)
-    {
-        string layerName = LayerMask.LayerToName(other.gameObject.layer);
-        if (layerName != playerIndex)
-        {
-            if (other.gameObject.tag == "Beam")
-            {
-                myHp -= 2;
-            }
-        }
-
+    
         if (myHp <= 0)
         {
             isDead = true;

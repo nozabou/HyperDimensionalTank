@@ -16,7 +16,7 @@ public class BullutScript : MonoBehaviour
         
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnCollisionEnter(Collision collision)
     {
         Destroy(this.gameObject);
     }

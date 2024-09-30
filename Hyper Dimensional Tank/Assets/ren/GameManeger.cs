@@ -31,6 +31,11 @@ public class GameManeger : MonoBehaviour
     private GameObject respownTimerObj2P;
     private TextMeshProUGUI respownTimerText1P;
     private TextMeshProUGUI respownTimerText2P;
+
+    //ƒŠƒX’n
+    public GameObject respornPoint1;
+    public GameObject respornPoint2;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -81,7 +86,7 @@ public class GameManeger : MonoBehaviour
                 playerScript1P.myHp = 100;
                 playerObj1P.SetActive(true);
                 respawnTime1P = 180;
-                playerObj1P.transform.position = new Vector3(0, 10, 0);
+                playerObj1P.transform.position = respornPoint1.transform.position;
             }
         }
 
@@ -105,7 +110,7 @@ public class GameManeger : MonoBehaviour
                 playerScript2P.myHp = 100;
                 playerObj2P.SetActive(true);
                 respawnTime2P = 180;
-                playerObj2P.transform.position = new Vector3(0, 10, 0);
+                playerObj2P.transform.position = respornPoint2.transform.position;
             }
         }
 
