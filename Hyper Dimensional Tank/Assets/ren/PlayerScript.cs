@@ -56,8 +56,11 @@ public class PlayerScript : MonoBehaviour
     public int myHp = 100;
     public bool isDead = false;
     public int playerStock = 2;
+    //爆発
+    public GameObject deadExplosion = null;
 
-  
+
+
     //ビーム(必殺技)
     public GameObject bulletBeam;
     private bool isShotBeam = false;
@@ -219,42 +222,37 @@ public class PlayerScript : MonoBehaviour
     }
 
 
-    //public void OnTriggerEnter(Collider other)
-    //{
-    //    string layerName = LayerMask.LayerToName(other.gameObject.layer);
-    //    if (layerName != playerIndex)
-    //    {
-    //        if (other.gameObject.tag == "Bullet")
-    //        {
-    //            myHp -= 5;
-    //        }
-    //        if (other.gameObject.tag == "StrongBullet")
-    //        {
-    //            myHp -= 30;
-    //        }
-           
-    //    }
 
-    //    if (myHp <= 0)
-    //    {
-    //        isDead = true;
-    //        playerStock--;
-    //    }
-    //}
+    public void OnCollisionEnter(Collision collision)
+    {
+        string layerName = LayerMask.LayerToName(collision.gameObject.layer);
+        if (layerName != playerIndex)
+        {
+            if (collision.gameObject.tag == "Bullet")
+            {
+                myHp -= 5;
+            }
+            if (collision.gameObject.tag == "StrongBullet")
+            {
+                myHp -= 30;
+            }
+
+        }
+
+        if (myHp <= 0)
+        {
+            isDead = true;
+            Instantiate(deadExplosion, this.transform.position, Quaternion.identity);
+            playerStock--;
+        }
+    }
+
     //ビームの多段ヒット
     public void OnTriggerStay(Collider other)
     {
         string layerName = LayerMask.LayerToName(other.gameObject.layer);
         if (layerName != playerIndex)
         {
-            if (other.gameObject.tag == "Bullet")
-            {
-                myHp -= 5;
-            }
-            if (other.gameObject.tag == "StrongBullet")
-            {
-                myHp -= 30;
-            }
             if (other.gameObject.tag == "Beam")
             {
                 myHp -= 2;
@@ -264,14 +262,8 @@ public class PlayerScript : MonoBehaviour
         if (myHp <= 0)
         {
             isDead = true;
+            Instantiate(deadExplosion, this.transform.position, Quaternion.identity);
             playerStock--;
         }
-    
-        if (myHp <= 0)
-        {
-            isDead = true;
-            playerStock--;
-        }
-       
     }
 }
