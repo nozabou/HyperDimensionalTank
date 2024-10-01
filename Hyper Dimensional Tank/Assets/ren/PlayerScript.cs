@@ -41,6 +41,7 @@ public class PlayerScript : MonoBehaviour
     //弾の速さ
     private float nomalBulletSpeed = 600f;
     private float strongBulletSpeed = 400f;
+   
 
     //クールタイム
     private int nomalCountTime = 0;
@@ -75,12 +76,11 @@ public class PlayerScript : MonoBehaviour
     //ビーム(必殺技)
     [SerializeField] private GameObject bulletBeam;
     private bool isShotBeam = false;
+    public float beamGauge = 0;
     //ビームの全体フレーム
     private int beamFream = 90;
     private int beamFreamCount = 0;
     private bool isBeamCount = false;
-    //ゲージ publicでよい
-    public int beamGauge = 0;
 
     //InputSystem
     private PlayerControl playerControl;
@@ -136,16 +136,16 @@ public class PlayerScript : MonoBehaviour
             return;
         }
 
-        if (beamGauge > 100)
+        if (beamGauge > 100.0f)
         {
-            beamGauge = 100;
+            beamGauge = 100.0f;
             isShotBeam = true;
         }
         else
         {
-            beamGauge++;
+            beamGauge += 0.1f;
         }
-        ////////////////////////////////////////////////////
+        //////////////////////////////////////////////////
         nomalCountTime++;
         if (nomalCountTime > canNomalCoolTime)
         {
