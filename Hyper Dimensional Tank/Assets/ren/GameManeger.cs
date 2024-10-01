@@ -27,6 +27,10 @@ public class GameManeger : MonoBehaviour
     private int respawnTime2P = 180;
     private GameObject respownPanel1P;
     private GameObject respownPanel2P;
+
+    private GameObject gamesetPanel1P;
+    private GameObject gamesetPanel2P;
+
     private GameObject respownTimerObj1P;
     private GameObject respownTimerObj2P;
     private TextMeshProUGUI respownTimerText1P;
@@ -57,12 +61,17 @@ public class GameManeger : MonoBehaviour
         //リスポーンタイマー
         respownPanel1P = GameObject.Find("Canvas/Canvas1P/RespownPanel");
         respownPanel2P = GameObject.Find("Canvas/Canvas2P/RespownPanel");
+        gamesetPanel1P = GameObject.Find("Canvas/Canvas1P/GamesetPanel");
+        gamesetPanel2P = GameObject.Find("Canvas/Canvas2P/GamesetPanel");
         respownTimerObj1P = GameObject.Find("Canvas/Canvas1P/RespownPanel/RespownTimer");
         respownTimerObj2P = GameObject.Find("Canvas/Canvas2P/RespownPanel/RespownTimer");
         respownTimerText1P = respownTimerObj1P.GetComponent<TextMeshProUGUI>();
         respownTimerText2P = respownTimerObj2P.GetComponent<TextMeshProUGUI>();
+
         respownPanel1P.SetActive(false);
         respownPanel2P.SetActive(false);
+        gamesetPanel1P.SetActive(false);
+        gamesetPanel2P.SetActive(false);
     }
 
     // Update is called once per frame
@@ -70,7 +79,10 @@ public class GameManeger : MonoBehaviour
     {
         if (playerScript1P.playerStock < 0)
         {
-          //勝敗を書く
+            //勝敗を書く
+            gamesetPanel1P.SetActive(true);
+            gamesetPanel2P.SetActive(true);
+            
             return;
         }
         if (playerScript1P.isDead)
