@@ -10,9 +10,9 @@ public class WallController : MonoBehaviour
 
     [SerializeField]
     private GameObject explosion = null;
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        if (collision.gameObject.tag == "Bullet")
+        if (other.gameObject.tag == "Bullet")
         {
             count++;
             if (count >= sCount)
@@ -22,7 +22,7 @@ public class WallController : MonoBehaviour
             }
 
         }
-        if (collision.gameObject.tag == "StrongBullet")
+        if (other.gameObject.tag == "StrongBullet")
         {
             count += 2;
             if (count >= sCount)
@@ -33,8 +33,6 @@ public class WallController : MonoBehaviour
 
         }
     }
-
-
 
     private void OnTriggerStay(Collider other)
     {
@@ -50,19 +48,4 @@ public class WallController : MonoBehaviour
         }
     }
 
-
-
-
-
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
 }

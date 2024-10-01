@@ -27,15 +27,15 @@ public class PlayerScript : MonoBehaviour
     private float headRotateSpeed = 50f;
     //Vector3 moveSpeed = new Vector3(0, 0, 1f);
     //float moveSpeed = 5f;
-    Transform head;
+    private Transform head;
 
     //íeÇÃìÆÇ´
     //íeÇÃî≠éÀèÍèä
-    public GameObject shotPoint;
+    [SerializeField] private GameObject shotPoint;
 
     //íe
-    public GameObject bulletNomal;
-    public GameObject bulletStrong;
+    [SerializeField] private GameObject bulletNomal;
+    [SerializeField] private GameObject bulletStrong;
    
 
     //íeÇÃë¨Ç≥
@@ -50,25 +50,36 @@ public class PlayerScript : MonoBehaviour
 
     private bool isShotNomal = true;
     private bool isShotStrong = true;
-   
 
-    //ëÃóÕ
+
+    //ëÃóÕ publicÇ≈ÇÊÇ¢
     public int myHp = 100;
     public bool isDead = false;
     public int playerStock = 2;
+
+    //ïúäàÇµÇΩÇ∆Ç´Ç…ñ≥ìG  public OK
+    public bool isInvincibility = false;
+    private int countInvincibility = 0; //ñ≥ìGéûä‘Ç‹Ç≈êîÇ¶ÇÈ
+    private int invincibilityTime = 180;  //ñ≥ìGéûä‘ÇÃÉtÉåÅ[ÉÄêî //3ïb
+
+    //ñ≥ìGÇøÇ©ÇøÇ©
+    [SerializeField] private GameObject headObj;
+    Color32 colorOrigin = new Color32(255, 255, 255, 1);
+    Color32 colorChange = new Color32(50, 50, 50, 1);
+
     //îöî≠
-    public GameObject deadExplosion = null;
+    [SerializeField] private GameObject deadExplosion = null;
 
 
 
     //ÉrÅ[ÉÄ(ïKéEãZ)
-    public GameObject bulletBeam;
+    [SerializeField] private GameObject bulletBeam;
     private bool isShotBeam = false;
     //ÉrÅ[ÉÄÇÃëSëÃÉtÉåÅ[ÉÄ
     private int beamFream = 90;
     private int beamFreamCount = 0;
     private bool isBeamCount = false;
-    //ÉQÅ[ÉW
+    //ÉQÅ[ÉW publicÇ≈ÇÊÇ¢
     public int beamGauge = 0;
 
     //InputSystem
@@ -77,6 +88,7 @@ public class PlayerScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
         moveVec = new Vector3(0,0,moveSpeed);
         head = transform.GetChild(0);
         playerControl = new PlayerControl();
@@ -90,6 +102,25 @@ public class PlayerScript : MonoBehaviour
         if (isDead)
         {
             return;
+        }
+        //ñ≥ìGéûä‘ÇÃÉJÉEÉìÉg
+        if(isInvincibility)
+        {
+            Color32 color = colorOrigin;
+            if (countInvincibility > invincibilityTime)
+            {
+                isInvincibility = false;
+                countInvincibility = 0;
+                GetComponent<Renderer>().material.color = color;
+                headObj.GetComponent<Renderer>().material.color = color;
+            }
+            countInvincibility++;
+            if((float)(countInvincibility) % 6 == 0)
+            {
+                color = colorChange;
+            }
+            GetComponent<Renderer>().material.color = color;
+            headObj.GetComponent<Renderer>().material.color = color;
         }
         /////////////////////////////////////////////////////
         ///ÉrÅ[ÉÄ
@@ -142,7 +173,13 @@ public class PlayerScript : MonoBehaviour
             head.rotation *= Quaternion.AngleAxis(headRotateSpeed * Time.deltaTime, Vector3.up);
         }
 
-       
+        if (myHp <= 0)
+        {
+            isDead = true;
+            Instantiate(deadExplosion, this.transform.position, Quaternion.identity);
+            playerStock--;
+        }
+
     }
  
     public void OnShotNomal(InputAction.CallbackContext context)
@@ -222,34 +259,33 @@ public class PlayerScript : MonoBehaviour
     }
 
 
-
-    public void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        string layerName = LayerMask.LayerToName(collision.gameObject.layer);
+        if (isInvincibility)
+        {
+            return;
+        }
+        string layerName = LayerMask.LayerToName(other.gameObject.layer);
         if (layerName != playerIndex)
         {
-            if (collision.gameObject.tag == "Bullet")
+            if (other.gameObject.tag == "Bullet")
             {
                 myHp -= 5;
             }
-            if (collision.gameObject.tag == "StrongBullet")
+            if (other.gameObject.tag == "StrongBullet")
             {
                 myHp -= 30;
             }
 
         }
-
-        if (myHp <= 0)
-        {
-            isDead = true;
-            Instantiate(deadExplosion, this.transform.position, Quaternion.identity);
-            playerStock--;
-        }
     }
-
     //ÉrÅ[ÉÄÇÃëΩíiÉqÉbÉg
     public void OnTriggerStay(Collider other)
     {
+        if (isInvincibility)
+        {
+            return;
+        }
         string layerName = LayerMask.LayerToName(other.gameObject.layer);
         if (layerName != playerIndex)
         {
@@ -257,13 +293,6 @@ public class PlayerScript : MonoBehaviour
             {
                 myHp -= 2;
             }
-        }
-
-        if (myHp <= 0)
-        {
-            isDead = true;
-            Instantiate(deadExplosion, this.transform.position, Quaternion.identity);
-            playerStock--;
         }
     }
 }

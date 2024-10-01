@@ -9,7 +9,7 @@ public class BullutScript : MonoBehaviour
     private GameObject explosion;
     void Start()
     {
-        
+       
     }
 
     // Update is called once per frame
@@ -18,9 +18,15 @@ public class BullutScript : MonoBehaviour
         
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        Instantiate(explosion, transform.position, Quaternion.identity);
-        Destroy(this.gameObject);
+        string otherLayerName = LayerMask.LayerToName(other.gameObject.layer);
+        string myLayerName = LayerMask.LayerToName(this.gameObject.layer);
+        if (otherLayerName != myLayerName)
+        {
+            Instantiate(explosion, transform.position, Quaternion.identity);
+            Destroy(this.gameObject);
+        }
+
     }
 }

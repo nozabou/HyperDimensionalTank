@@ -108,6 +108,7 @@ public class GameManeger : MonoBehaviour
                 respownPanel1P.SetActive(false);
                 stockUi1P[playerScript1P.playerStock].SetActive(false);
                 playerScript1P.isDead = false;
+                playerScript1P.isInvincibility = true;
                 playerScript1P.myHp = 100;
                 playerObj1P.SetActive(true);
                 respawnTime1P = 180;
@@ -136,6 +137,7 @@ public class GameManeger : MonoBehaviour
                 respownPanel2P.SetActive(false);
                 stockUi2P[playerScript2P.playerStock].SetActive(false);
                 playerScript2P.isDead = false;
+                playerScript2P.isInvincibility = true;
                 playerScript2P.myHp = 100;
                 playerObj2P.SetActive(true);
                 respawnTime2P = 180;
