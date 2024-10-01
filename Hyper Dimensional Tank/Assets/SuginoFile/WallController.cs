@@ -15,12 +15,38 @@ public class WallController : MonoBehaviour
         if (collision.gameObject.tag == "Bullet")
         {
             count++;
-            if (count > sCount)
+            if (count >= sCount)
             {
                 Instantiate(explosion, transform.position, Quaternion.identity);
                 Destroy(gameObject);
             }
-            
+
+        }
+        if (collision.gameObject.tag == "StrongBullet")
+        {
+            count += 2;
+            if (count >= sCount)
+            {
+                Instantiate(explosion, transform.position, Quaternion.identity);
+                Destroy(gameObject);
+            }
+
+        }
+    }
+
+
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.gameObject.tag == "Beam")
+        {
+            count++;
+            if (count >= sCount)
+            {
+                Instantiate(explosion, transform.position, Quaternion.identity);
+                Destroy(gameObject);
+            }
+
         }
     }
 
@@ -31,12 +57,12 @@ public class WallController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-          
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 }
