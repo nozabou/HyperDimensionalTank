@@ -70,7 +70,7 @@ public class GameManeger : MonoBehaviour
     {
         if (playerScript1P.playerStock < 0)
         {
-            Debug.Log("‚ ‚È‚½‚Ì•‰‚¯");
+          //Ÿ”s‚ð‘‚­
             return;
         }
         if (playerScript1P.isDead)
