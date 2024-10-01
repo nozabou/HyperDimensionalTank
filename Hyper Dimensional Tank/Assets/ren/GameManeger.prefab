@@ -46,9 +46,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hpBar1P: {fileID: 0}
   hpBar2P: {fileID: 0}
+  beamBar1P: {fileID: 0}
+  beamBar2P: {fileID: 0}
   stockUi1P:
   - {fileID: 0}
   - {fileID: 0}
   stockUi2P:
   - {fileID: 0}
   - {fileID: 0}
+  gamesetText1P: {fileID: 0}
+  gamesetText2P: {fileID: 0}
+  respornPoint1: {fileID: 0}
+  respornPoint2: {fileID: 0}

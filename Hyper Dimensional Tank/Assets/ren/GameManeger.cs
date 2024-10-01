@@ -22,19 +22,22 @@ public class GameManeger : MonoBehaviour
     //残機
     public GameObject[] stockUi1P;
     public GameObject[] stockUi2P;
-
+    //リスぽ
     private int respawnTime1P = 180;
     private int respawnTime2P = 180;
     private GameObject respownPanel1P;
     private GameObject respownPanel2P;
-
-    private GameObject gamesetPanel1P;
-    private GameObject gamesetPanel2P;
-
     private GameObject respownTimerObj1P;
     private GameObject respownTimerObj2P;
     private TextMeshProUGUI respownTimerText1P;
     private TextMeshProUGUI respownTimerText2P;
+
+    //終了
+    private GameObject gamesetPanel1P;
+    private GameObject gamesetPanel2P;
+    public TextMeshProUGUI gamesetText1P;
+    public TextMeshProUGUI gamesetText2P;
+
 
     //リス地
     public GameObject respornPoint1;
@@ -61,12 +64,16 @@ public class GameManeger : MonoBehaviour
         //リスポーンタイマー
         respownPanel1P = GameObject.Find("Canvas/Canvas1P/RespownPanel");
         respownPanel2P = GameObject.Find("Canvas/Canvas2P/RespownPanel");
-        gamesetPanel1P = GameObject.Find("Canvas/Canvas1P/GamesetPanel");
-        gamesetPanel2P = GameObject.Find("Canvas/Canvas2P/GamesetPanel");
+       
         respownTimerObj1P = GameObject.Find("Canvas/Canvas1P/RespownPanel/RespownTimer");
         respownTimerObj2P = GameObject.Find("Canvas/Canvas2P/RespownPanel/RespownTimer");
         respownTimerText1P = respownTimerObj1P.GetComponent<TextMeshProUGUI>();
         respownTimerText2P = respownTimerObj2P.GetComponent<TextMeshProUGUI>();
+
+        //勝敗
+        gamesetPanel1P = GameObject.Find("Canvas/Canvas1P/GamesetPanel");
+        gamesetPanel2P = GameObject.Find("Canvas/Canvas2P/GamesetPanel");
+     
 
         respownPanel1P.SetActive(false);
         respownPanel2P.SetActive(false);
@@ -82,7 +89,10 @@ public class GameManeger : MonoBehaviour
             //勝敗を書く
             gamesetPanel1P.SetActive(true);
             gamesetPanel2P.SetActive(true);
-            
+            playerObj1P.SetActive(false);
+            gamesetText2P.text = "WIN";
+
+
             return;
         }
         if (playerScript1P.isDead)
@@ -107,7 +117,10 @@ public class GameManeger : MonoBehaviour
 
         if (playerScript2P.playerStock < 0)
         {
-            Debug.Log("あなたの負け");
+            gamesetPanel1P.SetActive(true);
+            gamesetPanel2P.SetActive(true);
+            playerObj2P.SetActive(false);
+            gamesetText1P.text = "WIN";
             return;
         }
         if (playerScript2P.isDead)
