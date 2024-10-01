@@ -13,15 +13,15 @@ public class GameManeger : MonoBehaviour
     private PlayerScript playerScript2P;
 
     //HpUI
-    public Slider hpBar1P;
-    public Slider hpBar2P;
+    [SerializeField] private Slider hpBar1P;
+    [SerializeField] private Slider hpBar2P;
     //beamUI
-    public Slider beamBar1P;
-    public Slider beamBar2P;
+    [SerializeField] private Slider beamBar1P;
+    [SerializeField] private Slider beamBar2P;
 
     //残機
-    public GameObject[] stockUi1P;
-    public GameObject[] stockUi2P;
+    [SerializeField] private GameObject[] stockUi1P;
+    [SerializeField] private GameObject[] stockUi2P;
     //リスぽ
     private int respawnTime1P = 180;
     private int respawnTime2P = 180;
@@ -35,13 +35,13 @@ public class GameManeger : MonoBehaviour
     //終了
     private GameObject gamesetPanel1P;
     private GameObject gamesetPanel2P;
-    public TextMeshProUGUI gamesetText1P;
-    public TextMeshProUGUI gamesetText2P;
+    [SerializeField] private TextMeshProUGUI gamesetText1P;
+    [SerializeField] private TextMeshProUGUI gamesetText2P;
 
 
     //リス地
-    public GameObject respornPoint1;
-    public GameObject respornPoint2;
+    [SerializeField] private GameObject respornPoint1;
+    [SerializeField] private GameObject respornPoint2;
 
   
 

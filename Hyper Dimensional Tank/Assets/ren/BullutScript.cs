@@ -5,6 +5,8 @@ using UnityEngine;
 public class BullutScript : MonoBehaviour
 {
     // Start is called before the first frame update
+    [SerializeField]
+    private GameObject explosion;
     void Start()
     {
         
@@ -18,6 +20,7 @@ public class BullutScript : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+        Instantiate(explosion, transform.position, Quaternion.identity);
         Destroy(this.gameObject);
     }
 }
