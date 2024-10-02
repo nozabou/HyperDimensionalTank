@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using TMPro;
+using static UnityEngine.EventSystems.StandaloneInputModule;
 
 public class ResultScript : MonoBehaviour
 {
@@ -10,6 +12,10 @@ public class ResultScript : MonoBehaviour
     private int winPlayerIndex;
     private GameObject winTextObj;
     private TextMeshProUGUI winText;
+
+    //‚Ç‚¿‚ç‚ğ‘I‘ğ‚µ‚Ä‚¢‚é‚©‚ğ•Ï”‚ÅŠÇ—
+    private int selectIndex = 1;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -37,5 +43,31 @@ public class ResultScript : MonoBehaviour
     void Update()
     {
         
+    }
+
+    void FixedUpdate()
+    {
+        if(selectIndex == 1)
+        {
+            Debug.Log("¶");
+        }
+        else
+        {
+            Debug.Log("‰E");
+        }
+    }
+
+    public void OnSelect(InputAction.CallbackContext context)
+    {
+        // “ü—Í’l‚ğ•Û‚µ‚Ä‚¨‚­
+        Vector2 inputStick = context.ReadValue<Vector2>();
+        if (inputStick.x < -0.5f)
+        {
+            selectIndex = 1;
+        }
+        if (inputStick.x > 0.5f)
+        {
+            selectIndex = 2;
+        }
     }
 }
