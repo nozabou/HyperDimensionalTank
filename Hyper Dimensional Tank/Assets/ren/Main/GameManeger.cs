@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using UnityEditor.SceneTemplate;
+using UnityEngine.SceneManagement;
 
 public class GameManeger : MonoBehaviour
 {
@@ -33,10 +34,10 @@ public class GameManeger : MonoBehaviour
     private TextMeshProUGUI respownTimerText2P;
 
     //終了
-    private GameObject gamesetPanel1P;
-    private GameObject gamesetPanel2P;
-    [SerializeField] private TextMeshProUGUI gamesetText1P;
-    [SerializeField] private TextMeshProUGUI gamesetText2P;
+    //private GameObject gamesetPanel1P;
+    //private GameObject gamesetPanel2P;
+    //[SerializeField] private TextMeshProUGUI gamesetText1P;
+    //[SerializeField] private TextMeshProUGUI gamesetText2P;
 
 
     //リス地
@@ -45,8 +46,8 @@ public class GameManeger : MonoBehaviour
 
     //勝ったプレイヤーの番号を保存　1Pは1 2Pは2
     private int winPlayerIndex = 0;
-    //１秒たったらシーン移動
-    private int sceneMoveFrame = 60;
+    //数秒たったらシーン移動
+    private int sceneMoveFrame = 90;
 
     // Start is called before the first frame update
     void Start()
@@ -74,14 +75,14 @@ public class GameManeger : MonoBehaviour
         respownTimerText2P = respownTimerObj2P.GetComponent<TextMeshProUGUI>();
 
         //勝敗
-        gamesetPanel1P = GameObject.Find("Canvas/Canvas1P/GamesetPanel");
-        gamesetPanel2P = GameObject.Find("Canvas/Canvas2P/GamesetPanel");
+        //gamesetPanel1P = GameObject.Find("Canvas/Canvas1P/GamesetPanel");
+        //gamesetPanel2P = GameObject.Find("Canvas/Canvas2P/GamesetPanel");
      
 
         respownPanel1P.SetActive(false);
         respownPanel2P.SetActive(false);
-        gamesetPanel1P.SetActive(false);
-        gamesetPanel2P.SetActive(false);
+        //gamesetPanel1P.SetActive(false);
+        //gamesetPanel2P.SetActive(false);
     }
 
     // Update is called once per frame
@@ -90,8 +91,8 @@ public class GameManeger : MonoBehaviour
         if (playerScript1P.playerStock < 0)
         {
             //勝敗を書く
-            gamesetPanel1P.SetActive(true);
-            gamesetPanel2P.SetActive(true);
+            //gamesetPanel1P.SetActive(true);
+            //gamesetPanel2P.SetActive(true);
             playerObj1P.SetActive(false);
             //gamesetText2P.text = "WIN";
             PlayerPrefs.SetInt("Winner", 2);
@@ -99,7 +100,7 @@ public class GameManeger : MonoBehaviour
             {
                 sceneMoveFrame = 0;
                 //シーン移動
-                Debug.Log("WIN");
+                SceneManager.LoadScene("ResultScene");
             }
             sceneMoveFrame--;
             return;
@@ -127,8 +128,8 @@ public class GameManeger : MonoBehaviour
 
         if (playerScript2P.playerStock < 0)
         {
-            gamesetPanel1P.SetActive(true);
-            gamesetPanel2P.SetActive(true);
+            //gamesetPanel1P.SetActive(true);
+            //gamesetPanel2P.SetActive(true);
             playerObj2P.SetActive(false);
             //gamesetText1P.text = "WIN";
             PlayerPrefs.SetInt("Winner", 1);
@@ -136,7 +137,7 @@ public class GameManeger : MonoBehaviour
             {
                 sceneMoveFrame = 0;
                 //シーン移動
-                Debug.Log("WIN");
+                SceneManager.LoadScene("ResultScene");
             }
             sceneMoveFrame--;
             return;
