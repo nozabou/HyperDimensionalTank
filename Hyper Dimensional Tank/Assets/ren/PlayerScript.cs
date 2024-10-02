@@ -103,6 +103,10 @@ public class PlayerScript : MonoBehaviour
         {
             return;
         }
+        if(this.transform.position.y < -3)
+        {
+            myHp = 0;
+        }
         //–³“GŽžŠÔ‚ÌƒJƒEƒ“ƒg
         if(isInvincibility)
         {
