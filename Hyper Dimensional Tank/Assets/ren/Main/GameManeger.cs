@@ -43,7 +43,10 @@ public class GameManeger : MonoBehaviour
     [SerializeField] private GameObject respornPoint1;
     [SerializeField] private GameObject respornPoint2;
 
-  
+    //勝ったプレイヤーの番号を保存　1Pは1 2Pは2
+    private int winPlayerIndex = 0;
+    //１秒たったらシーン移動
+    private int sceneMoveFrame = 60;
 
     // Start is called before the first frame update
     void Start()
@@ -90,9 +93,15 @@ public class GameManeger : MonoBehaviour
             gamesetPanel1P.SetActive(true);
             gamesetPanel2P.SetActive(true);
             playerObj1P.SetActive(false);
-            gamesetText2P.text = "WIN";
-
-
+            //gamesetText2P.text = "WIN";
+            PlayerPrefs.SetInt("Winner", 2);
+            if (sceneMoveFrame < 0)
+            {
+                sceneMoveFrame = 0;
+                //シーン移動
+                Debug.Log("WIN");
+            }
+            sceneMoveFrame--;
             return;
         }
         if (playerScript1P.isDead)
@@ -121,7 +130,15 @@ public class GameManeger : MonoBehaviour
             gamesetPanel1P.SetActive(true);
             gamesetPanel2P.SetActive(true);
             playerObj2P.SetActive(false);
-            gamesetText1P.text = "WIN";
+            //gamesetText1P.text = "WIN";
+            PlayerPrefs.SetInt("Winner", 1);
+            if(sceneMoveFrame < 0)
+            {
+                sceneMoveFrame = 0;
+                //シーン移動
+                Debug.Log("WIN");
+            }
+            sceneMoveFrame--;
             return;
         }
         if (playerScript2P.isDead)

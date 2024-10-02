@@ -192,6 +192,8 @@ MonoBehaviour:
   myHp: 100
   isDead: 0
   playerStock: 2
+  isInvincibility: 0
+  headObj: {fileID: 0}
   deadExplosion: {fileID: 100010, guid: e0609132424a24844b1d53ad3d704fd9, type: 3}
   bulletBeam: {fileID: 4762414482884243123, guid: 85370b85a7d16a84a9cb6ae57f53352f, type: 3}
   beamGauge: 0
@@ -645,7 +647,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: b788df883c8d6bc4ab7b63a7dc490419, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
