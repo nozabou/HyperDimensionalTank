@@ -13,9 +13,13 @@ public class ResultScript : MonoBehaviour
     private GameObject winTextObj;
     private TextMeshProUGUI winText;
 
+
+
     //‚Ç‚¿‚ç‚ğ‘I‘ğ‚µ‚Ä‚¢‚é‚©‚ğ•Ï”‚ÅŠÇ—
     private int selectIndex = 1;
-    
+
+    [SerializeField] private GameObject cursor;
+
     // Start is called before the first frame update
     void Start()
     {
