@@ -16,14 +16,13 @@ public class Title : MonoBehaviour
     private TextMeshProUGUI optionText; 
     GameObject gameStartTextObj;
     GameObject optionTextObj;
-    
 
     // Start is called before the first frame update
     void Start()
     {
-        gameStartTextObj = GameObject.Find("GameStartText").gameObject;
-        optionTextObj = GameObject.Find("OptionText").gameObject;
-        cursor = GameObject.Find("Cursor").gameObject;
+        gameStartTextObj = GameObject.Find("Canvas/GameStartText").gameObject;
+        optionTextObj = GameObject.Find("Canvas/OptionText").gameObject;
+        cursor = GameObject.Find("Canvas/Cursor").gameObject;
         gameStartText = gameStartTextObj.GetComponent<TextMeshProUGUI>();
         optionText = optionTextObj.GetComponent<TextMeshProUGUI>();
     }
@@ -60,7 +59,7 @@ public class Title : MonoBehaviour
         {
             if (cursorNum == 1)
             {
-                SceneManager.LoadScene("TestScene");
+                SceneManager.LoadScene("ModeSelectScene");
             }
             if (cursorNum == 2)
             {
@@ -78,4 +77,6 @@ public class Title : MonoBehaviour
 
         return color;
     }
+
+    
 }

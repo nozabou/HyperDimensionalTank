@@ -9,7 +9,7 @@ using UnityEngine.SceneManagement;
 
 public class NewBehaviourScript : MonoBehaviour
 {
-    int cursorNum = 1;
+    int cursorNum = 3;
     GameObject cursor;
     public float speed = 1.0f;
     private float time;
@@ -23,10 +23,10 @@ public class NewBehaviourScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        singleObj = GameObject.Find("Single").gameObject;
-        multiObj = GameObject.Find("Multi").gameObject;
-        titleObj = GameObject.Find("Title").gameObject;
-        cursor = GameObject.Find("Cursor").gameObject;
+        singleObj = GameObject.Find("Canvas/Single").gameObject;
+        multiObj = GameObject.Find("Canvas/Multi").gameObject;
+        titleObj = GameObject.Find("Canvas/Title").gameObject;
+        cursor = GameObject.Find("Canvas/Cursor").gameObject;
         single = singleObj.GetComponent<TextMeshProUGUI>();
         multi = multiObj.GetComponent<TextMeshProUGUI>();
         title =titleObj.GetComponent<TextMeshProUGUI>();
@@ -50,7 +50,7 @@ public class NewBehaviourScript : MonoBehaviour
             title.color = GetTextColorAlpha(title.color);
             single.color = new Color32(0, 0, 0, 255);
             multi.color = new Color32(0, 0, 0, 255);
-            cursor.transform.localPosition = new Vector3(-230, -144, 0);
+            cursor.transform.localPosition = new Vector3(-210, -144, 0);
         }
         if (cursorNum == 2)
         {
@@ -69,18 +69,26 @@ public class NewBehaviourScript : MonoBehaviour
         // スペースキーが押されたら決定
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            if (cursorNum == 1)
+            if (cursorNum == 3)
             {
                 Debug.Log("ひとりで");
             }
             if (cursorNum == 2)
             {
-                Debug.Log("みんなで");
+                SceneManager.LoadScene("TestScene");
             }
-            if (cursorNum == 2)
+            if (cursorNum == 1)
             {
-                Debug.Log("タイトルに戻る");
+                SceneManager.LoadScene("TitleScene");
             }
+        }
+        if (cursorNum >= 4)
+        {
+            cursorNum = 3;
+        }
+        if (cursorNum <= 0)
+        {
+            cursorNum = 1;
         }
     }
     Color GetTextColorAlpha(Color color)
