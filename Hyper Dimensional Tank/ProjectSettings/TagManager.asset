@@ -9,6 +9,7 @@ TagManager:
   - FxTemporaire
   - Beam
   - StrongBullet
+  - Fade
   layers:
   - Default
   - TransparentFX
