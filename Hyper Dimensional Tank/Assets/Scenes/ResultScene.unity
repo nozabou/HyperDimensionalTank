@@ -625,7 +625,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player1P: {fileID: 7780386597445780533, guid: 00201aaa8e8e45e47bdf416535980ae8, type: 3}
   player2P: {fileID: 129311335730130770, guid: 1844fac8536d3084c982d1593ea0a449, type: 3}
-  cursor: {fileID: 0}
+  cursor: {fileID: 1526138876}
 --- !u!4 &635239162
 Transform:
   m_ObjectHideFlags: 0

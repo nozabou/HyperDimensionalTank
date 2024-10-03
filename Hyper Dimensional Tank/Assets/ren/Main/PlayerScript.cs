@@ -16,9 +16,10 @@ public class PlayerScript : MonoBehaviour
     public string playerIndex;
 
     //プレイヤーの動き
-    private float moveSpeed = 5f;
-    private Vector3 moveVec;
+    private float moveSpeed = 20f;
+    //private Vector3 moveVec;
     private Vector2 inputMove;
+    private Rigidbody playerRb;
 
     private bool isLeft = false;
     private bool isRight = false;
@@ -41,17 +42,6 @@ public class PlayerScript : MonoBehaviour
     //弾の速さ
     private float nomalBulletSpeed = 600f;
     private float strongBulletSpeed = 400f;
-   
-
-    //クールタイム
-    private int nomalCountTime = 0;
-    private int canNomalCoolTime = 60;
-    private int strongCountTime = 0;
-    private int canStrongCoolTime = 90;
-
-    private bool isShotNomal = true;
-    private bool isShotStrong = true;
-
 
     //体力 publicでよい
     public int myHp = 100;
@@ -72,7 +62,16 @@ public class PlayerScript : MonoBehaviour
     [SerializeField] private GameObject deadExplosion = null;
 
 
+    //クールタイム
+    private int coolTime;
+    private int canCoolTime = 60;
+    private int nomalCountTime = 0;
+    private int canNomalCoolTime = 60;
+    private int strongCountTime = 0;
+    private int canStrongCoolTime = 90;
 
+    private bool isShotNomal = true;
+    private bool isShotStrong = true;
     //ビーム(必殺技)
     [SerializeField] private GameObject bulletBeam;
     private bool isShotBeam = false;
@@ -88,8 +87,8 @@ public class PlayerScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
-        moveVec = new Vector3(0,0,moveSpeed);
+        playerRb = this.transform.GetComponent<Rigidbody>();
+        //moveVec = new Vector3(0,0,moveSpeed);
         head = transform.GetChild(0);
         playerControl = new PlayerControl();
         playerControl.Enable();
@@ -150,19 +149,19 @@ public class PlayerScript : MonoBehaviour
             beamGauge += 0.1f;
         }
         //////////////////////////////////////////////////
-        nomalCountTime++;
-        if (nomalCountTime > canNomalCoolTime)
+
+        coolTime++;
+        if(coolTime > canCoolTime)
         {
             isShotNomal = true;
-        }
-
-        strongCountTime++;
-        if (strongCountTime > canStrongCoolTime)
-        {
             isShotStrong = true;
         }
 
-        this.transform.Translate(inputMove.y * moveVec * Time.deltaTime);
+        //プレイヤーの移動
+        playerRb.AddForce(this.transform.forward * inputMove.y * moveSpeed * Time.deltaTime, ForceMode.Impulse);
+
+
+        //this.transform.Translate(inputMove.y * moveVec * Time.deltaTime);
         //Quaternion.AngleAxis(度数法, 軸);
         this.transform.rotation *= Quaternion.AngleAxis(inputMove.x * bodyRotateSpeed * Time.deltaTime, Vector3.up);
         
@@ -196,7 +195,7 @@ public class PlayerScript : MonoBehaviour
             GameObject newBullet = Instantiate(bulletNomal, bulletPosition, head.gameObject.transform.rotation);
             Vector3 dir = newBullet.transform.forward;
             newBullet.GetComponent<Rigidbody>().AddForce(dir * nomalBulletSpeed * Time.deltaTime, ForceMode.Impulse);
-            nomalCountTime = 0;
+            coolTime = 0;
             isShotNomal = false;
         }
     }
@@ -210,7 +209,7 @@ public class PlayerScript : MonoBehaviour
             GameObject newBullet = Instantiate(bulletStrong, bulletPosition, head.gameObject.transform.rotation);
             Vector3 dir = newBullet.transform.forward;
             newBullet.GetComponent<Rigidbody>().AddForce(dir * strongBulletSpeed * Time.deltaTime, ForceMode.Impulse);
-            strongCountTime = 0;
+            coolTime = 0;
             isShotStrong = false;
         }
     }

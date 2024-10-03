@@ -68,10 +68,12 @@ public class ResultScript : MonoBehaviour
         if (inputStick.x < -0.5f)
         {
             selectIndex = 1;
+            cursor.transform.localPosition = new Vector3(-350, -200, 0);
         }
         if (inputStick.x > 0.5f)
         {
             selectIndex = 2;
+            cursor.transform.localPosition = new Vector3(300, -200, 0);
         }
     }
 }
