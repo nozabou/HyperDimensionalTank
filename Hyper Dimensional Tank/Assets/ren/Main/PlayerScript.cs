@@ -66,10 +66,6 @@ public class PlayerScript : MonoBehaviour
     //クールタイム
     private int coolTime;
     private int canCoolTime = 60;
-    private int nomalCountTime = 0;
-    private int canNomalCoolTime = 60;
-    private int strongCountTime = 0;
-    private int canStrongCoolTime = 90;
 
     private bool isShotNomal = true;
     private bool isShotStrong = true;
@@ -77,6 +73,7 @@ public class PlayerScript : MonoBehaviour
     [SerializeField] private GameObject bulletBeam;
     private bool isShotBeam = false;
     public float beamGauge = 0;
+    private bool isCharge = false;
     //ビームの全体フレーム
     private int beamFream = 90;
     private int beamFreamCount = 0;
@@ -141,15 +138,20 @@ public class PlayerScript : MonoBehaviour
             return;
         }
 
-        if (beamGauge > 100.0f)
+        if (isCharge)
         {
-            beamGauge = 100.0f;
-            isShotBeam = true;
+            if (beamGauge > 100.0f)
+            {
+                beamGauge = 100.0f;
+                isShotBeam = true;
+            }
+            else
+            {
+                beamGauge += 0.1f;
+            }
         }
-        else
-        {
-            beamGauge += 0.1f;
-        }
+
+      
         //////////////////////////////////////////////////
 
         coolTime++;
@@ -158,7 +160,7 @@ public class PlayerScript : MonoBehaviour
             isShotNomal = true;
             isShotStrong = true;
         }
-        if(coolTime > 10)
+        if(coolTime > 20)
         {
             moveSpeed = tempSpeed;
         }
@@ -240,7 +242,23 @@ public class PlayerScript : MonoBehaviour
         }
     }
 
-    public void OnMove(InputAction.CallbackContext context)
+    public void OnCharge(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            //押した瞬間の処理
+            isCharge = true;
+        }
+        if (context.canceled)
+        {
+            //離した瞬間の処理
+            isCharge = false;
+        }
+       
+       
+    }
+
+        public void OnMove(InputAction.CallbackContext context)
     {
         // 入力値を保持しておく
         inputMove = context.ReadValue<Vector2>();

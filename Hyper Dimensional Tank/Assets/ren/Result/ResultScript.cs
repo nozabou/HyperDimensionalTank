@@ -4,11 +4,20 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using TMPro;
 using static UnityEngine.EventSystems.StandaloneInputModule;
+using Unity.VisualScripting;
+using UnityEngine.SceneManagement;
 
 public class ResultScript : MonoBehaviour
 {
     [SerializeField] private GameObject player1P;
     [SerializeField] private GameObject player2P;
+    //UI表示
+    private GameObject selectUi;
+    private int countTime = 0;
+    private bool isSelect = false; 
+
+
+
     private int winPlayerIndex;
     private GameObject winTextObj;
     private TextMeshProUGUI winText;
@@ -24,6 +33,8 @@ public class ResultScript : MonoBehaviour
     void Start()
     {
         winPlayerIndex = PlayerPrefs.GetInt("Winner", 0);
+        selectUi = GameObject.Find("Canvas/Select");
+        selectUi.SetActive(false);
         winTextObj = GameObject.Find("Canvas/WinText");
         winText = winTextObj.GetComponent<TextMeshProUGUI>();
         if(winPlayerIndex == 1)
@@ -51,13 +62,14 @@ public class ResultScript : MonoBehaviour
 
     void FixedUpdate()
     {
-        if(selectIndex == 1)
+        if (countTime > 40)
         {
-            Debug.Log("左");
+            selectUi.SetActive(true);
+            isSelect = true;
         }
         else
         {
-            Debug.Log("右");
+            countTime++;
         }
     }
 
@@ -74,6 +86,22 @@ public class ResultScript : MonoBehaviour
         {
             selectIndex = 2;
             cursor.transform.localPosition = new Vector3(300, -200, 0);
+        }
+    }
+
+    public void OnDicide(InputAction.CallbackContext context)
+    {
+        if (isSelect)
+        {
+            if (selectIndex == 1)
+            {
+                //シーン移動
+                SceneManager.LoadScene("TestScene");
+            }
+            else
+            {
+                Debug.Log("右");
+            }
         }
     }
 }

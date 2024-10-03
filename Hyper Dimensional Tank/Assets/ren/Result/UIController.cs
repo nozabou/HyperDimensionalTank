@@ -35,6 +35,15 @@ public partial class @UIController: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Decide"",
+                    ""type"": ""Button"",
+                    ""id"": ""f355b642-f46a-4cf8-bf29-37f9699e1fa4"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -57,6 +66,28 @@ public partial class @UIController: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
                     ""action"": ""Select"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6a89a818-3742-41d1-b60a-6bfb7921db8c"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Decide"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1ab94eb2-ad35-453f-b013-901f87e53a24"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Decide"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -129,6 +160,7 @@ public partial class @UIController: IInputActionCollection2, IDisposable
         // Result
         m_Result = asset.FindActionMap("Result", throwIfNotFound: true);
         m_Result_Select = m_Result.FindAction("Select", throwIfNotFound: true);
+        m_Result_Decide = m_Result.FindAction("Decide", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -191,11 +223,13 @@ public partial class @UIController: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Result;
     private List<IResultActions> m_ResultActionsCallbackInterfaces = new List<IResultActions>();
     private readonly InputAction m_Result_Select;
+    private readonly InputAction m_Result_Decide;
     public struct ResultActions
     {
         private @UIController m_Wrapper;
         public ResultActions(@UIController wrapper) { m_Wrapper = wrapper; }
         public InputAction @Select => m_Wrapper.m_Result_Select;
+        public InputAction @Decide => m_Wrapper.m_Result_Decide;
         public InputActionMap Get() { return m_Wrapper.m_Result; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -208,6 +242,9 @@ public partial class @UIController: IInputActionCollection2, IDisposable
             @Select.started += instance.OnSelect;
             @Select.performed += instance.OnSelect;
             @Select.canceled += instance.OnSelect;
+            @Decide.started += instance.OnDecide;
+            @Decide.performed += instance.OnDecide;
+            @Decide.canceled += instance.OnDecide;
         }
 
         private void UnregisterCallbacks(IResultActions instance)
@@ -215,6 +252,9 @@ public partial class @UIController: IInputActionCollection2, IDisposable
             @Select.started -= instance.OnSelect;
             @Select.performed -= instance.OnSelect;
             @Select.canceled -= instance.OnSelect;
+            @Decide.started -= instance.OnDecide;
+            @Decide.performed -= instance.OnDecide;
+            @Decide.canceled -= instance.OnDecide;
         }
 
         public void RemoveCallbacks(IResultActions instance)
@@ -280,5 +320,6 @@ public partial class @UIController: IInputActionCollection2, IDisposable
     public interface IResultActions
     {
         void OnSelect(InputAction.CallbackContext context);
+        void OnDecide(InputAction.CallbackContext context);
     }
 }
