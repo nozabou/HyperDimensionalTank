@@ -15,6 +15,11 @@ public class Timer : MonoBehaviour
         
     // 経過時間
     float time;
+    private void Start()
+    {
+        //フレームレートを60fpsにする
+        Application.targetFrameRate = 60;
+    }
 
     // Update is called once per frame
     void Update()
