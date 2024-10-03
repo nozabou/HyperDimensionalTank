@@ -123,6 +123,11 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &36641246 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3082517214499073118, guid: ff9ebd2c759a3f845a0d2e5b3c31ea04, type: 3}
+  m_PrefabInstance: {fileID: 6180031932494036154}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &144801812 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3519439301870329120, guid: b0f214d5726fa1341b9641d2c2c28c65, type: 3}
@@ -186,6 +191,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player2
       objectReference: {fileID: 0}
+    - target: {fileID: 5117221980447647190, guid: bc103409e9d8b434cbba9ac22ace1258, type: 3}
+      propertyPath: m_Drag
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6630177580329262287, guid: bc103409e9d8b434cbba9ac22ace1258, type: 3}
+      propertyPath: headObj
+      value: 
+      objectReference: {fileID: 1900015481}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -369,17 +382,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 8387593601209191376, guid: b0f214d5726fa1341b9641d2c2c28c65, type: 3}
   m_PrefabInstance: {fileID: 1099546792337020588}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &968880782 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5918975133134030481, guid: b0f214d5726fa1341b9641d2c2c28c65, type: 3}
-  m_PrefabInstance: {fileID: 1099546792337020588}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1025145167
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -631,21 +633,15 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 7825493652830830634, guid: b0f214d5726fa1341b9641d2c2c28c65, type: 3}
   m_PrefabInstance: {fileID: 1099546792337020588}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1734887476 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8095129409515651572, guid: b0f214d5726fa1341b9641d2c2c28c65, type: 3}
-  m_PrefabInstance: {fileID: 1099546792337020588}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1769242741 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3477674937098345577, guid: b0f214d5726fa1341b9641d2c2c28c65, type: 3}
   m_PrefabInstance: {fileID: 1099546792337020588}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1900015481 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3082517214499073118, guid: bc103409e9d8b434cbba9ac22ace1258, type: 3}
+  m_PrefabInstance: {fileID: 280918685}
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &2018085489 stripped
 MonoBehaviour:
@@ -783,7 +779,9 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 5573773325571743285, guid: b0f214d5726fa1341b9641d2c2c28c65, type: 3}
+    - {fileID: 903912076810448974, guid: b0f214d5726fa1341b9641d2c2c28c65, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b0f214d5726fa1341b9641d2c2c28c65, type: 3}
@@ -915,11 +913,11 @@ PrefabInstance:
     - target: {fileID: 8315750800423256685, guid: af1d60b0667de91429e789c51a3646a4, type: 3}
       propertyPath: gamesetText1P
       value: 
-      objectReference: {fileID: 968880782}
+      objectReference: {fileID: 0}
     - target: {fileID: 8315750800423256685, guid: af1d60b0667de91429e789c51a3646a4, type: 3}
       propertyPath: gamesetText2P
       value: 
-      objectReference: {fileID: 1734887476}
+      objectReference: {fileID: 0}
     - target: {fileID: 8315750800423256685, guid: af1d60b0667de91429e789c51a3646a4, type: 3}
       propertyPath: respornPoint1
       value: 
@@ -1001,6 +999,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player1
       objectReference: {fileID: 0}
+    - target: {fileID: 5117221980447647190, guid: ff9ebd2c759a3f845a0d2e5b3c31ea04, type: 3}
+      propertyPath: m_Drag
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6630177580329262287, guid: ff9ebd2c759a3f845a0d2e5b3c31ea04, type: 3}
+      propertyPath: headObj
+      value: 
+      objectReference: {fileID: 36641246}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

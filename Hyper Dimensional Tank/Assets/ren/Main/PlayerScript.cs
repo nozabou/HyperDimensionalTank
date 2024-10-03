@@ -17,6 +17,7 @@ public class PlayerScript : MonoBehaviour
 
     //プレイヤーの動き
     private float moveSpeed = 20f;
+    private float tempSpeed = 0f;
     //private Vector3 moveVec;
     private Vector2 inputMove;
     private Rigidbody playerRb;
@@ -92,6 +93,7 @@ public class PlayerScript : MonoBehaviour
         head = transform.GetChild(0);
         playerControl = new PlayerControl();
         playerControl.Enable();
+        tempSpeed = moveSpeed;
     }
 
     // Update is called once per frame
@@ -156,6 +158,10 @@ public class PlayerScript : MonoBehaviour
             isShotNomal = true;
             isShotStrong = true;
         }
+        if(coolTime > 10)
+        {
+            moveSpeed = tempSpeed;
+        }
 
         //プレイヤーの移動
         playerRb.AddForce(this.transform.forward * inputMove.y * moveSpeed * Time.deltaTime, ForceMode.Impulse);
@@ -187,6 +193,7 @@ public class PlayerScript : MonoBehaviour
  
     public void OnShotNomal(InputAction.CallbackContext context)
     {
+        moveSpeed = 0;
         if (isShotNomal)
         {
             //弾の発射する場所を取得する
@@ -196,11 +203,13 @@ public class PlayerScript : MonoBehaviour
             Vector3 dir = newBullet.transform.forward;
             newBullet.GetComponent<Rigidbody>().AddForce(dir * nomalBulletSpeed * Time.deltaTime, ForceMode.Impulse);
             coolTime = 0;
+            isShotStrong = false;
             isShotNomal = false;
         }
     }
     public void OnShotStrong(InputAction.CallbackContext context)
     {
+        moveSpeed = 0;
         if (isShotStrong)
         {
             //弾の発射する場所を取得する
@@ -210,6 +219,7 @@ public class PlayerScript : MonoBehaviour
             Vector3 dir = newBullet.transform.forward;
             newBullet.GetComponent<Rigidbody>().AddForce(dir * strongBulletSpeed * Time.deltaTime, ForceMode.Impulse);
             coolTime = 0;
+            isShotNomal = false;
             isShotStrong = false;
         }
     }
