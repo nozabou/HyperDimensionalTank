@@ -193,7 +193,7 @@ MonoBehaviour:
   isDead: 0
   playerStock: 2
   isInvincibility: 0
-  headObj: {fileID: 0}
+  headObj: {fileID: 3082517214499073118}
   deadExplosion: {fileID: 100010, guid: e0609132424a24844b1d53ad3d704fd9, type: 3}
   bulletBeam: {fileID: 4762414482884243123, guid: 85370b85a7d16a84a9cb6ae57f53352f, type: 3}
   beamGauge: 0
@@ -206,7 +206,7 @@ Rigidbody:
   m_GameObject: {fileID: 3702905572379637004}
   serializedVersion: 4
   m_Mass: 1
-  m_Drag: 0
+  m_Drag: 2
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
@@ -405,6 +405,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: b2ed74ae-b7e3-41e7-b651-6b320136d2b6
     m_ActionName: Player/BeamShot[/Keyboard/l,/SwitchProControllerHID/buttonWest]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6630177580329262287}
+        m_TargetAssemblyTypeName: PlayerScript, Assembly-CSharp
+        m_MethodName: OnCharge
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 8d43b0cb-d666-4f9e-a8d5-535b73f8d299
+    m_ActionName: Player/Charge[/XInputControllerWindows/buttonSouth]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: Gamepad
   m_DefaultActionMap: Player

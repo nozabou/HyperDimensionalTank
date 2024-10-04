@@ -75,7 +75,7 @@ public class PlayerScript : MonoBehaviour
     public float beamGauge = 0;
     private bool isCharge = false;
     //ƒr[ƒ€‚Ì‘S‘ÌƒtƒŒ[ƒ€
-    private int beamFream = 90;
+    private int beamFream = 120;
     private int beamFreamCount = 0;
     private bool isBeamCount = false;
 
@@ -147,7 +147,7 @@ public class PlayerScript : MonoBehaviour
             }
             else
             {
-                beamGauge += 0.1f;
+                beamGauge += 0.5f;
             }
         }
 
@@ -230,15 +230,20 @@ public class PlayerScript : MonoBehaviour
     {
         if (context.started && isShotBeam) // ƒ{ƒ^ƒ“‚ğ‰Ÿ‚µ‚½‚Æ‚«
         {
-            //’e‚Ì”­Ë‚·‚éêŠ‚ğæ“¾‚·‚é
-            Vector3 bulletPosition = shotPoint.transform.position;
-            //
-            GameObject newBullet = Instantiate(bulletBeam, bulletPosition, head.gameObject.transform.rotation);
-            // Vector3 dir = newBullet.transform.forward;
-            beamGauge = 0;
             isBeamCount = true;
-            isShotBeam = false;
-            Destroy(newBullet, 1); //10•bŒã‚É’e‚ğÁ‚·
+            if (beamFreamCount > 60)
+            {
+                //’e‚Ì”­Ë‚·‚éêŠ‚ğæ“¾‚·‚é
+                Vector3 bulletPosition = shotPoint.transform.position;
+                //
+                GameObject newBullet = Instantiate(bulletBeam, bulletPosition, head.gameObject.transform.rotation);
+                // Vector3 dir = newBullet.transform.forward;
+                beamGauge = 0;
+
+                isShotBeam = false;
+                Destroy(newBullet, 1); //10•bŒã‚É’e‚ğÁ‚·
+            }
+          
         }
     }
 

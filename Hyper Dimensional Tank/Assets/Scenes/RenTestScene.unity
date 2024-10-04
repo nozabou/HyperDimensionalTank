@@ -123,11 +123,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &36641246 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3082517214499073118, guid: ff9ebd2c759a3f845a0d2e5b3c31ea04, type: 3}
-  m_PrefabInstance: {fileID: 6180031932494036154}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &144801812 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3519439301870329120, guid: b0f214d5726fa1341b9641d2c2c28c65, type: 3}
@@ -191,14 +186,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player2
       objectReference: {fileID: 0}
-    - target: {fileID: 5117221980447647190, guid: bc103409e9d8b434cbba9ac22ace1258, type: 3}
-      propertyPath: m_Drag
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 6630177580329262287, guid: bc103409e9d8b434cbba9ac22ace1258, type: 3}
-      propertyPath: headObj
-      value: 
-      objectReference: {fileID: 1900015481}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -638,11 +625,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 3477674937098345577, guid: b0f214d5726fa1341b9641d2c2c28c65, type: 3}
   m_PrefabInstance: {fileID: 1099546792337020588}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1900015481 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3082517214499073118, guid: bc103409e9d8b434cbba9ac22ace1258, type: 3}
-  m_PrefabInstance: {fileID: 280918685}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &2018085489 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2965815174798174992, guid: b0f214d5726fa1341b9641d2c2c28c65, type: 3}
@@ -999,14 +981,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player1
       objectReference: {fileID: 0}
-    - target: {fileID: 5117221980447647190, guid: ff9ebd2c759a3f845a0d2e5b3c31ea04, type: 3}
-      propertyPath: m_Drag
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 6630177580329262287, guid: ff9ebd2c759a3f845a0d2e5b3c31ea04, type: 3}
-      propertyPath: headObj
-      value: 
-      objectReference: {fileID: 36641246}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
