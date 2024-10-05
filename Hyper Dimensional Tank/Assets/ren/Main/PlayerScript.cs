@@ -63,17 +63,22 @@ public class PlayerScript : MonoBehaviour
     [SerializeField] private GameObject deadExplosion = null;
 
 
-    //クールタイム
+    //玉のクールタイム
     private int coolTime;
     private int canCoolTime = 60;
-
     private bool isShotNomal = true;
     private bool isShotStrong = true;
+    //チャージエフェクト
+    [SerializeField] private GameObject chargeEffect;
+
     //ビーム(必殺技)
     [SerializeField] private GameObject bulletBeam;
+    [SerializeField] private GameObject beamCharge;
     private bool isShotBeam = false;
+    private float chargeValue = 0.2f;
     public float beamGauge = 0;
     private bool isCharge = false;
+    GameObject newBeam = null;  
     //ビームの全体フレーム
     private int beamFream = 120;
     private int beamFreamCount = 0;
@@ -85,6 +90,8 @@ public class PlayerScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        beamCharge.SetActive(false);
+        chargeEffect.SetActive(false);
         playerRb = this.transform.GetComponent<Rigidbody>();
         //moveVec = new Vector3(0,0,moveSpeed);
         head = transform.GetChild(0);
@@ -92,11 +99,41 @@ public class PlayerScript : MonoBehaviour
         playerControl.Enable();
         tempSpeed = moveSpeed;
     }
+    public void HeadRotationLeft(InputAction.CallbackContext context)
+    {
+        if (context.started) // ボタンを押したとき
+        {
+            isLeft = true;
+        }
+        else if (context.canceled) // ボタンを離したとき
+        {
+            isLeft = false;
+        }
+    }
 
+    public void HeadRotationRight(InputAction.CallbackContext context)
+    {
+        if (context.started) // ボタンを押したとき
+        {
+            isRight = true;
+        }
+        else if (context.canceled) // ボタンを離したとき
+        {
+            isRight = false;
+        }
+    }
     // Update is called once per frame
     void Update()
     {
-    
+       
+
+        if (myHp <= 0)
+        {
+            isDead = true;
+            Instantiate(deadExplosion, this.transform.position, Quaternion.identity);
+            playerStock--;
+        }
+
         if (isDead)
         {
             return;
@@ -126,53 +163,15 @@ public class PlayerScript : MonoBehaviour
         }
         /////////////////////////////////////////////////////
         ///ビーム
-        if (isBeamCount)
+        ///
+
+        //ビームが消えるまで動けない
+        if (newBeam != null)
         {
-            beamFreamCount++;
-            if (beamFreamCount > beamFream)
-            {
-                beamFreamCount = 0;
-                isBeamCount = false;
-                isShotBeam = false ;
-            }
+            Destroy(newBeam, 1); //弾を消す
             return;
         }
-
-        if (isCharge)
-        {
-            if (beamGauge > 100.0f)
-            {
-                beamGauge = 100.0f;
-                isShotBeam = true;
-            }
-            else
-            {
-                beamGauge += 0.5f;
-            }
-        }
-
-      
-        //////////////////////////////////////////////////
-
-        coolTime++;
-        if(coolTime > canCoolTime)
-        {
-            isShotNomal = true;
-            isShotStrong = true;
-        }
-        if(coolTime > 20)
-        {
-            moveSpeed = tempSpeed;
-        }
-
-        //プレイヤーの移動
-        playerRb.AddForce(this.transform.forward * inputMove.y * moveSpeed * Time.deltaTime, ForceMode.Impulse);
-
-
-        //this.transform.Translate(inputMove.y * moveVec * Time.deltaTime);
-        //Quaternion.AngleAxis(度数法, 軸);
-        this.transform.rotation *= Quaternion.AngleAxis(inputMove.x * bodyRotateSpeed * Time.deltaTime, Vector3.up);
-        
+        //ビームのための間頭は動かせる
         if (isLeft)
         {
             //Quaternion.AngleAxis(度数法, 軸);
@@ -183,14 +182,73 @@ public class PlayerScript : MonoBehaviour
             //Quaternion.AngleAxis(度数法, 軸);
             head.rotation *= Quaternion.AngleAxis(headRotateSpeed * Time.deltaTime, Vector3.up);
         }
-
-        if (myHp <= 0)
+        //ビーム発射フレームカウント開始
+        if (isBeamCount)
         {
-            isDead = true;
-            Instantiate(deadExplosion, this.transform.position, Quaternion.identity);
-            playerStock--;
+           
+            beamGauge = 0;
+            beamFreamCount++;
+            if (beamFreamCount > 60)
+            {
+                beamCharge.SetActive(false);
+                //弾の発射する場所を取得する
+                Vector3 bulletPosition = shotPoint.transform.position;
+                //
+                newBeam = Instantiate(bulletBeam, bulletPosition, head.gameObject.transform.rotation);
+
+                
+                beamFreamCount = 0;
+                isBeamCount = false;
+                isShotBeam = false;
+            }
+            return;
         }
 
+
+
+        //////////////////////////////////////////////////
+
+        //玉のクールタイム
+        //クールタイムカウント
+        coolTime++;
+        if (coolTime > canCoolTime)
+        {
+            isShotNomal = true;
+            isShotStrong = true;
+        }
+        if (coolTime > 20)
+        {
+            moveSpeed = tempSpeed;
+        }
+        //チャージ中は球を打てなくしたい
+        //ゲージチャージ
+        if (isCharge)
+        {
+            if (beamGauge >= 100.0f)
+            {
+                beamGauge = 100.0f;
+                isShotBeam = true;
+                chargeEffect.SetActive(false);
+            }
+            else
+            {
+                beamGauge += chargeValue;
+                chargeEffect.SetActive(true);
+            }
+            isShotNomal = false;
+            isShotStrong = false;
+            return;
+        }
+
+       
+
+
+
+
+        //プレイヤーの移動
+        playerRb.AddForce(this.transform.forward * inputMove.y * moveSpeed * Time.deltaTime, ForceMode.Impulse);
+        //Quaternion.AngleAxis(度数法, 軸);
+        this.transform.rotation *= Quaternion.AngleAxis(inputMove.x * bodyRotateSpeed * Time.deltaTime, Vector3.up);
     }
  
     public void OnShotNomal(InputAction.CallbackContext context)
@@ -230,20 +288,8 @@ public class PlayerScript : MonoBehaviour
     {
         if (context.started && isShotBeam) // ボタンを押したとき
         {
+            beamCharge.SetActive(true);
             isBeamCount = true;
-            if (beamFreamCount > 60)
-            {
-                //弾の発射する場所を取得する
-                Vector3 bulletPosition = shotPoint.transform.position;
-                //
-                GameObject newBullet = Instantiate(bulletBeam, bulletPosition, head.gameObject.transform.rotation);
-                // Vector3 dir = newBullet.transform.forward;
-                beamGauge = 0;
-
-                isShotBeam = false;
-                Destroy(newBullet, 1); //10秒後に弾を消す
-            }
-          
         }
     }
 
@@ -253,11 +299,13 @@ public class PlayerScript : MonoBehaviour
         {
             //押した瞬間の処理
             isCharge = true;
+            
         }
         if (context.canceled)
         {
             //離した瞬間の処理
             isCharge = false;
+            chargeEffect.SetActive(false);
         }
        
        
@@ -270,29 +318,7 @@ public class PlayerScript : MonoBehaviour
      
     }
 
-    public void HeadRotationLeft(InputAction.CallbackContext context)
-    {
-        if (context.started) // ボタンを押したとき
-        {
-            isLeft = true;
-        }
-        else if (context.canceled) // ボタンを離したとき
-        {
-            isLeft = false;
-        }
-    }
-
-    public void HeadRotationRight(InputAction.CallbackContext context)
-    {
-        if (context.started) // ボタンを押したとき
-        {
-            isRight = true;
-        }
-        else if (context.canceled) // ボタンを離したとき
-        {
-            isRight = false;
-        }
-    }
+   
 
 
     private void OnTriggerEnter(Collider other)
